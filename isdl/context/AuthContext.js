@@ -29,13 +29,12 @@ export const AuthProvider = ({children}) =>{
                 'Content-Type' : 'application/json',
             },
             credentials: 'include',
-            body:JSON.stringify({'name':e.target.name.value, 'email':e.target.email.value, 'password':e.target.password.value})
+            body:JSON.stringify({'email':e.target.email.value, 'password':e.target.password.value})
         })
         let data = await response.json()
         console.log(response)
         if(response.status === 200 ){
             setUser(jwt_decode(data.jwt))
-            console.log(user)
             setAuthToken(data.jwt)
             localStorage.setItem('authTokens', JSON.stringify(data.jwt))
             router.push('/dashboard')
@@ -52,7 +51,8 @@ export const AuthProvider = ({children}) =>{
     let contextData ={
         loginUser:loginUser,
         User:user,
-        logout:logout
+        logout:logout,
+        Jwt:authToken,  
     }
     return(
         <AuthContext.Provider value={contextData}>

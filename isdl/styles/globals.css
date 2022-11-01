@@ -1,9 +1,12 @@
-html,
+html{
+  height: 100%;
+}
 body {
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  height: 100%;
 }
 
 a {
@@ -24,10 +27,4 @@ a {
     background: black;
   }
 }
-.login-bg{
-  display: flex;
-  width:700px;
-  height:500px;
-  box-shadow: 5px ,5px, 5px, 5px;
-  background: #fffce5;
-}
+

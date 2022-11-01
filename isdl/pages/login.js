@@ -4,11 +4,12 @@ import {
   Input,
   FormControl,
   FormLabel,
-  FormHelperText,
   Text,
   Button,
+  Image
 } from "@chakra-ui/react";
 import AuthContext from "../context/AuthContext";
+import bg from '../public/blue.jpg'
 
 const login = () => {
   const { loginUser } = useContext(AuthContext);
@@ -17,14 +18,14 @@ const login = () => {
   const [email, setEmail] = useState();
 
   return (
-    <Box display="flex" justifyContent={"center"}>
+    <Box display="flex" justifyContent={"center"} >
       <Box
-        width="700px"
+        width="1000px"
         height="500px"
         bg="#ffffe5"
         display="flex"
         marginTop={"200px"}
-        boxShadow={"10px 10px 10px 10px #555555"}
+        boxShadow={"15px  10px 10px #555555"}
         border={"2px solid black"}
         borderRadius={"20px"}
       >
@@ -33,28 +34,29 @@ const login = () => {
           bg="#b5e5c3"
           borderRadius={"20px 0px 0px 20px"}
           padding="30px"
+          paddingTop="100px"
+          width="40%"
         >
-          <Text fontSize={"50px"} as="b">
-            Login
-          </Text>
+          <Image src="hall.png"></Image>
         </Box>
         <Box
           padding={"10px"}
           paddingTop={"80px"}
           display="flex"
           flexDirection={"column"}
+          width={"45%"}
         >
-          <form onSubmit={loginUser}>
-            <FormControl width={"300px"}>
-              <FormLabel>Name</FormLabel>
-              <Input type="name" name="name" />
-              <FormHelperText> </FormHelperText>
+          <form onSubmit={loginUser} width={"100%"}>
+          <Text fontSize={"50px"} as="b">
+            Login
+          </Text>
+            <FormControl width={"100%"}>
               <FormLabel>Email address</FormLabel>
               <Input type="email" name="email" />
               <FormLabel>Password</FormLabel>
               <Input type="password" name="password" />
             </FormControl>
-            <Button marginTop="70px" bg={"#ff9800"} type="submit">
+            <Button border="2px solid black"  width="100%" marginTop="70px" bg={"#ff9800"} type="submit">
                 Submit
               </Button>
           </form>
