@@ -1,18 +1,20 @@
 import React from "react";
 import { Box, Button, Text, Image } from "@chakra-ui/react";
+import {useRouter } from "next/router";
 
 const hall_card = ({ hall }) => {
+  const router = useRouter();
   if (!hall.pending) {
     return (
       <Box
         bg="#fffef2"
         display="flex"
-        // border="2px solid black "
         flexDirection={"column"}
-        width="550px"
+        minwidth="550px"
         height="375px"
         borderRadius="20px"
         boxShadow={"5px 5px 10px "}
+        margin="50px"
       >
         <Box
           bg="#96d8aa"
@@ -62,7 +64,7 @@ const hall_card = ({ hall }) => {
               <Text fontSize="28">  &#9733; &#9733; &#9733; &#9733; &#9734;  </Text>
             </Box>
           </Box>
-          <Box display="flex" width="60%" height="100%" flexDirection="column">
+          <Box display="flex" width="60%" height="100%" flexDirection="column" justifyContent="center"  >
             <Box width="100%" height="70%">
               <Text padding="50px" paddingBottom="10px" fontWeight="800">
                 {" "}
@@ -75,14 +77,17 @@ const hall_card = ({ hall }) => {
               </Text>
             </Box>
             <Button
-              marginLeft="50px"
-              width="70%"
+              marginLeft="60%"
+              width="150px"
               colorScheme="red"
               paddingTop="5px"
               fontSize="20px"
               border=" 2px solid black"
               marginTop="20px"
               color="black"
+              onClick={() =>{
+                router.push(`/hall/${hall.id}`);
+              }}
             >
               Book
             </Button>
@@ -97,7 +102,7 @@ const hall_card = ({ hall }) => {
         display="flex"
         // border="2px solid black "
         flexDirection={"column"}
-        width="550px"
+        minwidth="550px"
         height="375px"
         borderRadius="20px"
         boxShadow={"5px 5px 10px "}
@@ -150,7 +155,7 @@ const hall_card = ({ hall }) => {
 
             </Box>
           </Box>
-          <Box display="flex" width="60%" height="100%" flexDirection="column">
+          <Box display="flex" width="60%" height="100%" flexDirection="column" >
             <Box width="100%" height="70%">
               <Text padding="50px" paddingBottom="10px" fontWeight="800">
                 {" "}
@@ -164,7 +169,7 @@ const hall_card = ({ hall }) => {
             </Box>
             <Button
               marginLeft="50px"
-              width="70%"
+              width="100px"
               colorScheme="White"
               paddingTop="5px"
               fontSize="20px"

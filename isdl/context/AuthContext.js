@@ -19,8 +19,8 @@ export const AuthProvider = ({children}) =>{
         
       }, []);
 
-    let User =null;
-    let loginUser = async (e ) => {
+    let User = null;
+    let loginUser = async (e) => {
         console.log('Form Submitted')
         e.preventDefault()
         let response = await fetch("https://isdllab.herokuapp.com/login", {

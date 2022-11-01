@@ -9,7 +9,7 @@ import Navbar from "../components/navbar"
 function MyApp({ Component, pageProps }) {
   return (
     <ChakraProvider >
-      <Box bg="#ADD8E6" display='flex'  flexDirection="column" height="1080px" >
+      <Box bg="#ADD8E6" display='flex'  flexDirection="column" minheight="1080px" >
         <AuthProvider>
           <Navbar/>
           <Component {...pageProps} />
