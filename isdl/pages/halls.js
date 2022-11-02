@@ -80,6 +80,9 @@ function halls() {
       let data = await response.json();
       setHalls(data);
     })();
+    return (
+      <div>Here comes JSX !</div>
+  );
   }
 }
 

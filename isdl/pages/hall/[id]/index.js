@@ -1,7 +1,12 @@
 import React, { useState } from "react";
-import { Box, Button, Text, Image, useComponentStyles__unstable } from "@chakra-ui/react";
+import {
+  Box,
+  Button,
+  Text,
+  Image,
+} from "@chakra-ui/react";
 import { Router, useRouter } from "next/router";
-// import Time_slider from '../../../components/Time_slider'
+import Time_slider from "../../../components/Time_slider"
 
 const index = () => {
   const { asPath } = useRouter();
@@ -51,7 +56,7 @@ const index = () => {
           </Box>
           <Box display="flex" flexDirection="column" height="400px">
             <Box bg="#aae3bb" height="300px">
-              {/* <Time_slider></Time_slider> */}
+              <Time_slider/>
             </Box>
             <Box
               display="flex"
@@ -90,15 +95,21 @@ const index = () => {
     } else {
       (async () => {
         console.log("Where are my halls");
-        const response = await fetch("https://isdllab.herokuapp.com/allHalls?", {
-          method: "GET",
-        });
+        const response = await fetch(
+          "https://isdllab.herokuapp.com/allHalls?",
+          {
+            method: "GET",
+          }
+        );
         let data = await response.json();
-        for( let i = 0; i < data.length; i++){
-          if(data[i].id==path[2]) setHall(data[i])
+        for (let i = 0; i < data.length; i++) {
+          if (data[i].id == path[2]) setHall(data[i]);
         }
       })();
     }
+    return <div>Here comes JSX !</div>;
+  } else {
+    return <div>Here comes JSX !</div>;
   }
 };
 

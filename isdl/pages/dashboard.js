@@ -85,9 +85,14 @@ function dashboard() {
         let data = await response.json();
         if (!halls) setHalls(data);
       })();
+        return (
+            <div>Here comes JSX !</div>
+        );
     }
   } else {
-    <div>who are u ???</div>;
+    return (
+      <div>who are u ???</div>
+    )
   }
 }
 

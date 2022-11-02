@@ -1,6 +1,6 @@
 import React from 'react'  
 import { endOfToday, set } from 'date-fns' 
-import TimeRange from 'react-timeline-range-slider'  
+import TimeRange from '../components/slider'  
 
 const now = new Date()
 const getTodayAtSpecificHour = (hour = 12) =>
@@ -18,7 +18,7 @@ const disabledIntervals = [
   { start: getTodayAtSpecificHour(20), end: getTodayAtSpecificHour(24) }
 ]
 
-class Time_slider extends React.Component {  
+class App extends React.Component {  
   state = {  
     error: false,  
     selectedInterval: [selectedStart, selectedEnd],  
@@ -44,4 +44,4 @@ class Time_slider extends React.Component {
   }  
 }  
 
-export default Time_slider
+export default App
