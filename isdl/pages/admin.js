@@ -41,7 +41,9 @@ const admin = () => {
       alert("something went wrong");
     }
     console.log(response);
-    getPendings();
+    setTimeout(() => {
+      getPendings();
+    })
   }
 
   async function getPendings() {

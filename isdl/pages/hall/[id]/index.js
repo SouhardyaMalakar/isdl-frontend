@@ -5,7 +5,7 @@ import Booking from "../../../components/Booking";
 import AuthContext from "../../../context/AuthContext";
 
 const index = () => {
-  const { date , jwt } = useContext(AuthContext);
+  const { date , Jwt } = useContext(AuthContext);
   const { asPath } = useRouter();
   const path = asPath.split("/");
   const router = useRouter();
@@ -67,7 +67,7 @@ const index = () => {
             </Box>
           </Box>
           
-          <Booking date={date} hall={hall.id} jwt= {jwt} />
+          <Booking date={date} hall={hall.id} jwt= {Jwt} />
           <Button
           marginLeft="250px"
             onClick={() => {
