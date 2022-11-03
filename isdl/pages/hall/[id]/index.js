@@ -28,42 +28,43 @@ const index = () => {
             >
               <Box
                 bg="#fbeecd"
-                width="500px"
-                height="400px"
+                width="700px"
+                height="350px"
                 borderRadius="30px"
               >
-                <Image></Image>
+                <Image
+                  src="https://cdn.pixabay.com/photo/2014/05/18/19/15/lecture-hall-347316_960_720.jpg"
+                  borderRadius="30px"
+                ></Image>
               </Box>
             </Box>
             <Box
               display="flex"
               flexDirection="column"
               margin="50px"
-              padding="50px"
+              padding="70px"
               boxShadow={"5px 5px 10px "}
               borderRadius="30px"
               bg="rgba(256,256,256,0.2)"
               width="800px"
             >
-              <Text fontSize="50px" fontWeight="600">
+              <Text fontSize="60px" fontWeight="600">
                 {" "}
-                LT {hall.hall_name}
+                LT {hall.id}
               </Text>
-              <Text>
+              <Text fontWeight="800" fontSize="26px"> 
+                Location : {hall.hall_location}
+              </Text>
+              <Text fontWeight="800" fontSize="26px"> 
+                Equipments : 
+              </Text>
+              <Text fontSize="22px">
                 Lorem ipsum, or lipsum as it is sometimes known, is dummy text
                 used in laying out print , graphic or web designs. The passage
                 is attributed to an unknown .
               </Text>
-              <Text>
-                Lorem ipsum, or lipsum as it is sometimes known, is dummy text
-                used in laying out print , graphic or web designs. The passage
-                is attributed to an unknown .
-              </Text>
-              <Text>
-                Lorem ipsum, or lipsum as it is sometimes known, is dummy text
-                used in laying out print , graphic or web designs. The passage
-                is attributed to an unknown .
-              </Text>
+              <Text fontWeight="800" fontSize="26px"> Capacity : {hall.hall_capacity} </Text>
+              <Text fontWeight="800" fontSize="26px"> Rating : {hall.hall_rating} &#9733; </Text>
             </Box>
           </Box>
           

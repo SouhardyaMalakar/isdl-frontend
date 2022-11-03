@@ -2,9 +2,8 @@ import React from "react";
 import { Box, Button, Text, Image } from "@chakra-ui/react";
 import {useRouter } from "next/router";
 
-const hall_card = ({ hall }) => {
+const hall_card = ({ hall, req }) => {
   const router = useRouter();
-  if (!hall.pending) {
     return (
       <Box
         bg="#fffef2"
@@ -15,13 +14,15 @@ const hall_card = ({ hall }) => {
         borderRadius="20px"
         boxShadow={"5px 5px 10px "}
         margin="50px"
+        border="2px solid black"
       >
         <Box
           bg="#96d8aa"
-          borderRadius="20px 20px 0px 0px "
+          borderRadius="16px 16px 0px 0px "
           height="20%"
           width="100%"
         >
+          {req== 1 && 
           <Text
             paddingLeft="20px"
             fontWeight="600"
@@ -29,8 +30,18 @@ const hall_card = ({ hall }) => {
             paddingTop="15px"
           >
             {" "}
-            Hall : LT10
-          </Text>
+            Hall : LT {hall.hall}
+          </Text>}
+          {req!= 1 && 
+          <Text
+            paddingLeft="20px"
+            fontWeight="600"
+            fontSize="22"
+            paddingTop="15px"
+          >
+            {" "}
+            Hall : LT {hall.id}
+          </Text>}
         </Box>
         <Box
           margin="20px"
@@ -49,8 +60,8 @@ const hall_card = ({ hall }) => {
           >
             <Image
               margin="30px"
-              width="150px"
-              height="180px"
+              width="80%"
+              height="200px"
               src="hall.jpeg"
               borderRadius="5px"
               boxShadow={"5px 5px 10px "}
@@ -61,23 +72,43 @@ const hall_card = ({ hall }) => {
               margin="25px"
               height="50px"
             >
-              <Text fontSize="28">  &#9733; &#9733; &#9733; &#9733; &#9734;  </Text>
+              <Text fontSize="28" align="center">   &#9733; &#9733; &#9733; &#9733; </Text>
             </Box>
           </Box>
           <Box display="flex" width="60%" height="100%" flexDirection="column" justifyContent="center"  >
-            <Box width="100%" height="70%">
-              <Text padding="50px" paddingBottom="10px" fontWeight="800">
-                {" "}
-                Lorem Ipsum is simply dummy text{" "}
+          {req==0  && 
+            <Box width="100%" height="70%" bg="rgba(200,200,200,0.2)" borderRadius="30px">
+              <Text padding="50px" paddingBottom="10px" fontWeight="800" fontSize="20">
+
+                Location : {hall.hall_location}
+                <br/>
+                Capacity : {hall.hall_capacity}
+                <br/>
+                Rating : {hall.hall_rating}
+                <br/>
+                Equipments : Something ... 
+                
               </Text>
-              <Text paddingLeft="50px" paddingRight="20px">
+            </Box>}
+            {req!=0  && 
+            <Box width="400px" height="70%"  borderRadius="30px">
+              <Text fontSize="20px" padding="50px" paddingBottom="10px" fontWeight="600">
                 {" "}
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry.
+                Name: {hall.user}
               </Text>
-            </Box>
+              <Text paddingLeft="50px" paddingRight="20px" fontWeight="500">
+                {" "}
+                Start: {hall.slotStart.slice(0,10)}  { hall.slotStart.slice(11,16)}
+              </Text>
+              <Text paddingLeft="50px" paddingRight="20px" fontWeight="500">
+                End : {hall.slotStart.slice(0,10)}  { hall.slotEnd.slice(11,16)}
+              </Text>
+            </Box>}
+
+
+            {!hall.pending  && 
             <Button
-              marginLeft="60%"
+              marginLeft="40%"
               width="150px"
               colorScheme="red"
               paddingTop="5px"
@@ -86,103 +117,35 @@ const hall_card = ({ hall }) => {
               marginTop="20px"
               color="black"
               onClick={() =>{
-                router.push(`/hall/${hall.id}`);
+                console.log(hall)
+                if(req==1){
+                  router.push(`/hall/${hall.hall}`);
+                }else{
+                  router.push(`/hall/${hall.id}`);
+                }
+                
               }}
             >
               Book
-            </Button>
-          </Box>
-        </Box>
-      </Box>
-    );
-  } else {
-    return (
-      <Box
-        bg="#fffef2"
-        display="flex"
-        // border="2px solid black "
-        flexDirection={"column"}
-        minwidth="550px"
-        height="375px"
-        borderRadius="20px"
-        boxShadow={"5px 5px 10px "}
-      >
-        <Box
-          bg="#96d8aa"
-          borderRadius="20px 20px 0px 0px "
-          height="20%"
-          width="100%"
-        >
-          <Text
-            paddingLeft="20px"
-            fontWeight="600"
-            fontSize="22"
-            paddingTop="15px"
-          >
-            {" "}
-            Hall : LT10
-          </Text>
-        </Box>
-        <Box
-          margin="20px"
-          marginTop="0px"
-          display="flex"
-          flexDirection="row"
-          width="92.5%"
-          height="80%"
-        >
-          <Box
-            display="flex"
-            width="40%"
-            height="100%"
-            flexDirection="column"
-            justifyContent="space-evenly"
-          >
-            <Image
-              margin="30px"
-              width="150px"
-              height="180px"
-              src="hall.jpeg"
-              borderRadius="5px"
-              boxShadow={"5px 5px 10px "}
-            ></Image>
-            <Box
-              width="80%"
-              margin="25px"
-              height="50px"
-            >
-              <Text fontSize="28">  &#9733; &#9733; &#9733; &#9733; &#9734;  </Text>
-
-            </Box>
-          </Box>
-          <Box display="flex" width="60%" height="100%" flexDirection="column" >
-            <Box width="100%" height="70%">
-              <Text padding="50px" paddingBottom="10px" fontWeight="800">
-                {" "}
-                Lorem Ipsum is simply dummy text{" "}
-              </Text>
-              <Text paddingLeft="50px" paddingRight="20px">
-                {" "}
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry.
-              </Text>
-            </Box>
+            </Button>}
+            {hall.pending  && 
             <Button
-              marginLeft="50px"
-              width="100px"
-              colorScheme="White"
+              marginLeft="40%"
+              width="150px"
+              colorScheme="lol"
               paddingTop="5px"
               fontSize="20px"
               border=" 2px solid black"
               marginTop="20px"
-              color="Red"
+              color="red"
             >
               Pending ... 
-            </Button>
+            </Button>}
+
+
           </Box>
         </Box>
       </Box>
-    );
-  }
+    )
 };
 export default hall_card;

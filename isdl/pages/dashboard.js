@@ -7,12 +7,15 @@ import { Router, useRouter } from "next/router";
 
 function dashboard() {
   const { User, Jwt } = useContext(AuthContext);
-  const [halls, setHalls] = useState(null);
+  const [lechalls, setHalls] = useState(null);
   const router = useRouter();
 
   if (User && Jwt) {
-    if (halls) {
-      console.log(halls);
+    if (lechalls) {
+      let halls;
+      console.log(lechalls);
+      const n = Math.min(lechalls.length,3);
+      halls=lechalls.slice(-4,-1);
       return (
         <Box height="100%">
           <Box
@@ -35,13 +38,17 @@ function dashboard() {
             <Box
               display="flex"
               height="55%"
+              minHeight="200px"
               width="100%"
               justifyContent="space-evenly"
-              flexWrap="wrap"
+              bg="#70717220"
+              borderRadius="20px"
+              // flexWrap="wrap"
+              marginBottom="50px"
             >
               {halls.map((hall) => {
                 {
-                  return <Hall_card key={hall.id} hall={hall} />;
+                  return <Hall_card key={hall.id} hall={hall}  req={1}/>;
                 }
               })}
             </Box>

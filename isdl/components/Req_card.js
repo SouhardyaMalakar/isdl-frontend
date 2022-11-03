@@ -20,6 +20,7 @@ function Req_card({pending}) {
       boxShadow={"5px 5px 10px "}
       margin="50px"
       height="300px"
+      border="2px solid black"
     >
       <Box
         bg="#96d8aa"
@@ -75,11 +76,11 @@ function Req_card({pending}) {
           flexDirection="column"
           justifyContent="center"
         >
-          <Box width="100%" height="70%">
-            <Text padding="50px" paddingTop= "10px" paddingBottom="10px" fontWeight="800">
+          <Box width="100%" height="70%" >
+            <Text padding="50px" paddingTop= "20px" paddingLeft="70px" fontWeight="800">
               {" "}
               Request By: {pending.user}<br/>
-              Date: {pending.slotStart.slice(0,9)} <br/>
+              Date: {pending.slotStart.slice(0,10)} <br/>
               Start:  {pending.slotStart.slice(11,19)}<br/>
               End: {pending.slotEnd.slice(11,19)}
 

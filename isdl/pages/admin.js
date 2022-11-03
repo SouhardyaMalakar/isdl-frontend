@@ -68,7 +68,7 @@ const admin = () => {
         <Text fontSize="30px" fontWeight="1000">
           Pending Requests :)
         </Text>
-        <Button width="200px" colorScheme="red" onClick={() => {router.push("/dashboard")}}> Back</Button>
+        <Button width="200px" colorScheme="red" border="2px solid black"   onClick={() => {router.push("/dashboard")}}> Back</Button>
         </Box>
         <Box display="flex" flexWrap="wrap" flexDirection="row" width="1900px">
           {pendings.map((pending) => {

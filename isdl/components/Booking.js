@@ -13,7 +13,7 @@ const selectedEnd = getTodayAtSpecificHour(14);
 const startTime = getTodayAtSpecificHour(7);
 const endTime = endOfToday();
 let disabledIntervals = [];
-let called=0;
+let localDate=0;
 
 async function bookHall({ id, jwt ,Date,start,end}) { 
   let Bg = window.document.getElementsByClassName("react_time_range__track")[0].style.backgroundColor 
@@ -54,6 +54,7 @@ else{
 }
 
 async function getDisabled({id,Date}) {
+  localDate=Date;
   console.log("Blocked plox !");
   const response = await fetch("https://isdllab.herokuapp.com/getAllBookings", {
     method: "GET",
@@ -75,13 +76,10 @@ async function getDisabled({id,Date}) {
           start: getTodayAtSpecificHour(data[i].slotStart.slice(11 ,13)),
           end: getTodayAtSpecificHour(data[i].slotEnd.slice(11 ,13))
         });
-        // console.log(getTodayAtSpecificHour(data[i].slotStart.slice(11 ,13)));
-        // console.log(data[i].slotEnd);
       }
     }
   }
   console.log(disabled);
-
   disabledIntervals = disabled;
 }
 
@@ -92,12 +90,12 @@ class App extends React.Component {
   };
   errorHandler = ({ error }) => this.setState({ error });
   onChangeCallback = (selectedInterval) => this.setState({ selectedInterval });
-
   render() {
+    
     const { selectedInterval, error } = this.state;
     const date = this.props.date;
     const Date = date.toLocaleString().split(",")[0];
-    if (called!=0) {
+    if (localDate==Date) {
       return (
         <Box>
           <Box display="flex" flexDirection="column" height="400px">
@@ -147,7 +145,6 @@ class App extends React.Component {
       );
     } else {
       getDisabled({id:this.props.hall,Date:Date});
-      called=called+1;
       return (
         <Box padding="200px">
           <Text fontSize="70px" fontWeight="1000">
