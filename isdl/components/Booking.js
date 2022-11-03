@@ -55,7 +55,6 @@ else{
 
 async function getDisabled({id,Date}) {
   localDate=Date;
-  console.log("Blocked plox !");
   const response = await fetch("https://isdllab.herokuapp.com/getAllBookings", {
     method: "GET",
   });
@@ -69,8 +68,6 @@ async function getDisabled({id,Date}) {
         month= month.substring(1);
       }
       const BookDay = Bd[1] + '/' + month+ '/' + Bd[0]
-      console.log(BookDay)
-      console.log(Date)
       if (BookDay == Date) {
         disabled.push({
           start: getTodayAtSpecificHour(data[i].slotStart.slice(11 ,13)),
