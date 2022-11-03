@@ -15,20 +15,24 @@ const endTime = endOfToday();
 let disabledIntervals = [];
 let called=0;
 
-async function bookHall({ id, jwt ,Date}) {
+async function bookHall({ id, jwt ,Date,start,end}) { 
+  let Bg = window.document.getElementsByClassName("react_time_range__track")[0].style.backgroundColor 
+  console.log(Bg);
+  
+  if(Bg=='rgba(98, 203, 102, 0.5)'){
   console.log("Book plox !");
   console.log(jwt);
   console.log(Date);
-  console.log(selectedStart.toLocaleTimeString('it-IT'))
-  console.log(selectedEnd.toLocaleTimeString('it-IT'))
+  console.log(start.toLocaleTimeString('it-IT'))
+  console.log(end.toLocaleTimeString('it-IT'))
 
   const response = await fetch(
     "https://isdllab.herokuapp.com/createBooking?" +
       new URLSearchParams({
         id: id,
         date:Date,
-        start: selectedStart.toLocaleTimeString('it-IT'),
-        end: selectedEnd.toLocaleTimeString('it-IT'),
+        start: start.toLocaleTimeString('it-IT'),
+        end:  end.toLocaleTimeString('it-IT'),
         jwt: jwt,
       }),
     {
@@ -43,6 +47,10 @@ async function bookHall({ id, jwt ,Date}) {
     alert("something went wrong");
   }
   getDisabled({id:id,Date:Date});
+}
+else{
+  alert("Invalid slot selected !!");
+}
 }
 
 async function getDisabled({id,Date}) {
@@ -89,7 +97,6 @@ class App extends React.Component {
     const { selectedInterval, error } = this.state;
     const date = this.props.date;
     const Date = date.toLocaleString().split(",")[0];
-
     if (called!=0) {
       return (
         <Box>
@@ -122,7 +129,7 @@ class App extends React.Component {
             >
               <Button
                 onClick={() =>
-                  bookHall({ id: this.props.hall, jwt: this.props.jwt, Date:Date })
+                  bookHall({ id: this.props.hall, jwt: this.props.jwt, Date:Date, start:selectedInterval[0], end:selectedInterval[1]})
                 }
                 marginLeft={"1300px"}
                 colorScheme="red"
