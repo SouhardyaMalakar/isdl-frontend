@@ -11,7 +11,7 @@ import Navbar from "../components/navbar"
 function MyApp({ Component, pageProps }) {
   return (
     <ChakraProvider >
-      <Box bg="#ADD8E6" display='flex'  flexDirection="column" minheight="1080px" >
+      <Box bg="linear-gradient(to right, rgba(63,81,181,0.4), rgba(3, 169, 244, .4))" display='flex' flexDirection="column" minHeight="1080px" >
         <AuthProvider>
           <Navbar/>
           <Component {...pageProps} />

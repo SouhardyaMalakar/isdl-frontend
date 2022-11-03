@@ -16,7 +16,6 @@ function dashboard() {
       return (
         <Box height="100%">
           <Box
-            bg="linear-gradient(to right, rgba(63,81,181,0.4), rgba(3, 169, 244, .4))"
             display="flex"
             flexDirection="column"
             flexWrap="wrap"
@@ -83,7 +82,7 @@ function dashboard() {
           }
         );
         let data = await response.json();
-        if (!halls) setHalls(data);
+        setHalls(data);
       })();
         return (
             <div>Here comes JSX !</div>

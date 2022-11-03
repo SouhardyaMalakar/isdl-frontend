@@ -1,38 +1,50 @@
-import React, { useState } from "react";
-import {
-  Box,
-  Button,
-  Text,
-  Image,
-} from "@chakra-ui/react";
+import React, { useState, useContext } from "react";
+import { Box, Button, Text, Image } from "@chakra-ui/react";
 import { Router, useRouter } from "next/router";
-import Time_slider from "../../../components/Time_slider"
+import Booking from "../../../components/Booking";
+import AuthContext from "../../../context/AuthContext";
 
 const index = () => {
+  const { date , jwt } = useContext(AuthContext);
   const { asPath } = useRouter();
   const path = asPath.split("/");
   const router = useRouter();
   const [hall, setHall] = useState();
   if (path[2] != "[id]") {
-    console.log(path[2]);
+    const Date = date.toLocaleString().split(",")[0];
+    console.log(date);
     if (hall) {
-      console.log(hall);
+      console.log(hall.id);
       return (
-        <Box display="flex" flexDirection="column">
-          <Box display="flex" height="500px">
+        <Box display="flex" flexDirection="column" width="100%" height="1100px">
+          <Box display="flex" height="600px">
             <Box
               display="flex"
               width="50%"
               padding="200px"
               paddingTop="100px"
-              paddingLeft="300px"
+              paddingLeft="200px"
               paddingBottom="0px"
             >
-              <Box bg="#fbeecd" width="500px" height="400px">
+              <Box
+                bg="#fbeecd"
+                width="500px"
+                height="400px"
+                borderRadius="30px"
+              >
                 <Image></Image>
               </Box>
             </Box>
-            <Box display="flex" flexDirection="column" padding="50px">
+            <Box
+              display="flex"
+              flexDirection="column"
+              margin="50px"
+              padding="50px"
+              boxShadow={"5px 5px 10px "}
+              borderRadius="30px"
+              bg="rgba(256,256,256,0.2)"
+              width="800px"
+            >
               <Text fontSize="50px" fontWeight="600">
                 {" "}
                 LT {hall.hall_name}
@@ -54,42 +66,23 @@ const index = () => {
               </Text>
             </Box>
           </Box>
-          <Box display="flex" flexDirection="column" height="400px">
-            <Box bg="#aae3bb" height="300px">
-              <Time_slider/>
-            </Box>
-            <Box
-              display="flex"
-              justifyContent="space-between"
-              padding="100px"
-              paddingTop="50px"
-            >
-              <Button
-                onClick={() => {
-                  router.push("/halls");
-                }}
-                colorScheme="red"
-                width="300px"
-                height="60px"
-                fontSize="24px"
-              >
-                {" "}
-                Back
-              </Button>
-              <Button
-                onClick={() => {
-                  router.push("/halls");
-                }}
-                colorScheme="red"
-                width="300px"
-                height="60px"
-                fontSize="24px"
-              >
-                {" "}
-                Book
-              </Button>
-            </Box>
-          </Box>
+          
+          <Booking date={date} hall={hall.id} jwt= {jwt} />
+          <Button
+          marginLeft="250px"
+            onClick={() => {
+              router.push("/halls");
+            }}
+            colorScheme="red"
+            width="300px"
+            height="60px"
+            fontSize="24px"
+            boxShadow={"5px 5px 10px black"}
+            marginTop="-20px"
+          >
+            {" "}
+            Back
+          </Button>
         </Box>
       );
     } else {

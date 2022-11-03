@@ -1,6 +1,5 @@
 import { createContext, useState, useEffect } from "react";
 import jwt_decode from 'jwt-decode'
-import { NextResponse } from 'next/server'
 import { useRouter } from 'next/router'
 
 
@@ -10,13 +9,13 @@ export const AuthProvider = ({children}) =>{
     
     const [authToken,setAuthToken] = useState(null)
     const [user,setUser] = useState(null)
+    const [date,setDate] = useState(new Date())
     const router = useRouter ();
     useEffect(() => {
         if(localStorage && localStorage.getItem('authTokens')){
             setAuthToken(JSON.parse(localStorage.getItem('authTokens')))
             setUser(jwt_decode(localStorage.getItem('authTokens')))
         }
-        
       }, []);
 
     let User = null;
@@ -48,11 +47,17 @@ export const AuthProvider = ({children}) =>{
         localStorage.removeItem('authTokens')
         router.push("/login")
     }
+    const updateDate = (e) => {
+        setDate(e)
+        console.log(e)
+    }
     let contextData ={
         loginUser:loginUser,
         User:user,
         logout:logout,
         Jwt:authToken,  
+        updateDate:updateDate,  
+        date:date
     }
     return(
         <AuthContext.Provider value={contextData}>

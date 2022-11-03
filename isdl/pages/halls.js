@@ -1,21 +1,21 @@
 import { Button, Text, Box } from "@chakra-ui/react";
 import AuthContext from "../context/AuthContext";
 import { useContext, useState } from "react";
-import Hall_card from "../components/halls/Hall_card";
+import Hall_card from "../components/halls/Hall_card"; 
 import { Router, useRouter } from "next/router";
 import Calendar from 'react-calendar'
-// import '../components/Calender.css'
 import moment from 'moment'
 
-function halls() {
-  const { User, Jwt } = useContext(AuthContext);
-  const [dateState, setDateState] = useState(new Date());
+const halls = () => {
+  const { User, Jwt , updateDate } = useContext(AuthContext);
+  const [date, setDate] = useState(new Date());
 
   const [halls, setHalls] = useState(null);
   const router = useRouter();
   if (halls) {
     const changeDate = (e) => {
-      setDateState(e);
+      setDate(e);
+      updateDate(e);
     };
     return (
       <Box display="flex" height="100%" flexDir="column">
@@ -48,11 +48,11 @@ function halls() {
                 </Text>
               </Box>
               <Box>
-              <Calendar height= "500px" value={dateState} onChange={changeDate} />
+              <Calendar height= "500px" value={date} onChange={changeDate} />
               </Box>
              <Box padding="50px" paddingTop="0px" display="flex" justifyContent="space-between">
               <Text color="black" padding="20px" fontSize="20" paddingTop="0px">
-                Selected date :   {moment(dateState).format('MMMM Do YYYY')}
+                Selected date :   {moment(date).format('MMMM Do YYYY')}
             </Text>
             <Button colorScheme="red" width="100px"> Filter</Button>
             </Box>

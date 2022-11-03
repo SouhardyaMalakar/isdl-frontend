@@ -9,13 +9,19 @@ function navbar() {
   const router = useRouter ();
 
   if (User) {
+    console.log(User);
     return (
       <Box  bg="#161a2b"  height = "80px" padding={"10px"} display ="flex" flexDirection={"row"} justifyContent={"space-between"} paddingRight= "50px" paddingLeft = "50px">
         <Box display="flex">
         <Image  marginRight = "50px" width="50px" height="50px" src="college.png"></Image>
         <Text fontSize={"40"}color="white" >Lecture Hall Booking </Text>
         </Box>
-      <Button  border="2px solid black"  marginTop="10px" paddingTop = '5px'colorScheme={"orange"} onClick={logout} >LOGOUT</Button>
+        <Box>
+       
+       {User.isAdmin == true && <Button  border="2px solid black"  margin="10px" paddingTop = '5px'colorScheme={"green"} onClick={() => router.push('/admin')} >Admin</Button> }
+       <Button  border="2px solid black"  margin="10px" paddingTop = '5px'colorScheme={"yellow"} onClick={() => router.push('/dashboard')}>DashBoard</Button>
+      <Button  border="2px solid black"  margin="10px" paddingTop = '5px'colorScheme={"orange"} onClick={logout} >LOGOUT</Button>
+      </Box>
     </Box>
     );
   } else {
