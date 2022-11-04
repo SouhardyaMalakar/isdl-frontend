@@ -31,7 +31,6 @@ async function bookHall({ id, jwt ,Date,start,end}) {
       method: "POST",
     }
   );
-  console.log(response);
 
   if (response.status == 200) {
     alert("Hall Booking sent for approval !!");
@@ -47,6 +46,7 @@ else{
 
 async function getDisabled({id,Date}) {
   localDate=Date;
+
   const response = await fetch("https://isdllab.herokuapp.com/getAllBookings", {
     method: "GET",
   });
@@ -80,10 +80,12 @@ class App extends React.Component {
   errorHandler = ({ error }) => this.setState({ error });
   onChangeCallback = (selectedInterval) => this.setState({ selectedInterval });
   render() {
-    
     const { selectedInterval, error } = this.state;
     const date = this.props.date;
     const Date = date.toLocaleString().split(",")[0];
+    console.log(localDate)
+    getDisabled({id:this.props.hall,Date:Date});
+
     if (localDate==Date) {
       return (
         <Box>
@@ -133,7 +135,6 @@ class App extends React.Component {
         </Box>
       );
     } else {
-      getDisabled({id:this.props.hall,Date:Date});
       return (
         <Box padding="200px">
           <Text fontSize="70px" fontWeight="1000">

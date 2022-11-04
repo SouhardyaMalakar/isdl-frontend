@@ -77,7 +77,6 @@ const halls = () => {
     );
   } else {
     (async () => {
-      console.log("Where are my halls");
       const response = await fetch("https://isdllab.herokuapp.com/allHalls?", {
         method: "GET",
       });

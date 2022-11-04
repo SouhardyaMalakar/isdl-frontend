@@ -12,9 +12,7 @@ const index = () => {
   const [hall, setHall] = useState();
   if (path[2] != "[id]") {
     const Date = date.toLocaleString().split(",")[0];
-    console.log(date);
     if (hall) {
-      console.log(hall.id);
       return (
         <Box display="flex" flexDirection="column" width="100%" height="1100px">
           <Box display="flex" height="600px">
@@ -86,7 +84,6 @@ const index = () => {
       );
     } else {
       (async () => {
-        console.log("Where are my halls");
         const response = await fetch(
           "https://isdllab.herokuapp.com/allHalls?",
           {

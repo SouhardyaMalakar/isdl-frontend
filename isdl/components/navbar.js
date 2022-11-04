@@ -9,7 +9,6 @@ function navbar() {
   const router = useRouter ();
 
   if (User) {
-    console.log(User);
     return (
       <Box  bg="#003851"  height = "80px" padding={"10px"} display ="flex" flexDirection={"row"} justifyContent={"space-between"} paddingRight= "50px" paddingLeft = "50px">
         <Box display="flex">
