@@ -21,6 +21,7 @@ function navbar() {
        {User.isAdmin == true && <Button  border="2px solid black"  margin="10px" paddingTop = '5px'colorScheme={"green"} onClick={() => router.push('/admin')} >Admin</Button> }
        <Button  border="2px solid black"  margin="10px" paddingTop = '5px'colorScheme={"yellow"} onClick={() => router.push('/dashboard')}>DashBoard</Button>
       <Button  border="2px solid black"  margin="10px" paddingTop = '5px'colorScheme={"orange"} onClick={logout} >LOGOUT</Button>
+      <Button  border="2px solid black"  margin="10px" paddingTop = '5px'colorScheme={"white"} onClick={() => router.push('/feedback  ')}>Feedback</Button>
       </Box>
     </Box>
     );

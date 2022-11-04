@@ -45,23 +45,21 @@ const index = () => {
               padding="70px"
               boxShadow={"5px 5px 10px "}
               borderRadius="30px"
-              bg="rgba(256,256,256,0.2)"
+              bg="rgba(256,256,256,0.4)"
               width="800px"
             >
               <Text fontSize="60px" fontWeight="600">
                 {" "}
-                LT {hall.id}
+                {hall.hall_name}
               </Text>
               <Text fontWeight="800" fontSize="26px"> 
                 Location : {hall.hall_location}
               </Text>
               <Text fontWeight="800" fontSize="26px"> 
-                Equipments : 
+                Equipments :  
               </Text>
-              <Text fontSize="22px">
-                Lorem ipsum, or lipsum as it is sometimes known, is dummy text
-                used in laying out print , graphic or web designs. The passage
-                is attributed to an unknown .
+              <Text fontSize="22px" marginLeft="100px">
+               {hall.hall_equipments}
               </Text>
               <Text fontWeight="800" fontSize="26px"> Capacity : {hall.hall_capacity} </Text>
               <Text fontWeight="800" fontSize="26px"> Rating : {hall.hall_rating} &#9733; </Text>

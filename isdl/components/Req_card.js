@@ -62,7 +62,6 @@ function Req_card({pending}) {
             boxShadow={"5px 5px 10px "}
           ></Image>
           <Box
-            // border="1px solid black"
             width="80%"
             margin="25px"
             height="50px"

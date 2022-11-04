@@ -1,28 +1,28 @@
 import React from "react";
 import { Box, Button, Text, Image } from "@chakra-ui/react";
-import {useRouter } from "next/router";
+import { useRouter } from "next/router";
 
 const hall_card = ({ hall, req }) => {
   const router = useRouter();
-    return (
+  return (
+    <Box
+      bg="#fffef2"
+      display="flex"
+      flexDirection={"column"}
+      minwidth="550px"
+      height="375px"
+      borderRadius="20px"
+      boxShadow={"5px 5px 10px "}
+      margin="50px"
+      border="2px solid black"
+    >
       <Box
-        bg="#fffef2"
-        display="flex"
-        flexDirection={"column"}
-        minwidth="550px"
-        height="375px"
-        borderRadius="20px"
-        boxShadow={"5px 5px 10px "}
-        margin="50px"
-        border="2px solid black"
+        bg="#96d8aa"
+        borderRadius="16px 16px 0px 0px "
+        height="20%"
+        width="100%"
       >
-        <Box
-          bg="#96d8aa"
-          borderRadius="16px 16px 0px 0px "
-          height="20%"
-          width="100%"
-        >
-          {req== 1 && 
+        {req == 1 && (
           <Text
             paddingLeft="20px"
             fontWeight="600"
@@ -31,8 +31,9 @@ const hall_card = ({ hall, req }) => {
           >
             {" "}
             Hall : LT {hall.hall}
-          </Text>}
-          {req!= 1 && 
+          </Text>
+        )}
+        {req != 1 && (
           <Text
             paddingLeft="20px"
             fontWeight="600"
@@ -40,73 +41,98 @@ const hall_card = ({ hall, req }) => {
             paddingTop="15px"
           >
             {" "}
-            Hall : LT {hall.id}
-          </Text>}
+           {hall.hall_name}
+          </Text>
+        )}
+      </Box>
+      <Box
+        margin="20px"
+        marginTop="0px"
+        display="flex"
+        flexDirection="row"
+        width="92.5%"
+        height="80%"
+      >
+        <Box
+          display="flex"
+          width="40%"
+          height="100%"
+          flexDirection="column"
+          justifyContent="space-evenly"
+        >
+          <Image
+            margin="30px"
+            width="80%"
+            height="200px"
+            src="hall.jpeg"
+            borderRadius="5px"
+            boxShadow={"5px 5px 10px "}
+          ></Image>
+          <Box
+            // border="1px solid black"
+            width="80%"
+            margin="25px"
+            height="50px"
+          >
+            <Text fontSize="28" align="center">
+              {" "}
+              &#9733; &#9733; &#9733; &#9733;{" "}
+            </Text>
+          </Box>
         </Box>
         <Box
-          margin="20px"
-          marginTop="0px"
           display="flex"
-          flexDirection="row"
-          width="92.5%"
-          height="80%"
+          width="60%"
+          height="100%"
+          flexDirection="column"
+          justifyContent="center"
         >
-          <Box
-            display="flex"
-            width="40%"
-            height="100%"
-            flexDirection="column"
-            justifyContent="space-evenly"
-          >
-            <Image
-              margin="30px"
-              width="80%"
-              height="200px"
-              src="hall.jpeg"
-              borderRadius="5px"
-              boxShadow={"5px 5px 10px "}
-            ></Image>
+          {req == 0 && (
             <Box
-              // border="1px solid black"
-              width="80%"
-              margin="25px"
-              height="50px"
+              width="100%"
+              height="70%"
+              bg="rgba(200,200,200,0.2)"
+              borderRadius="30px"
             >
-              <Text fontSize="28" align="center">   &#9733; &#9733; &#9733; &#9733; </Text>
-            </Box>
-          </Box>
-          <Box display="flex" width="60%" height="100%" flexDirection="column" justifyContent="center"  >
-          {req==0  && 
-            <Box width="100%" height="70%" bg="rgba(200,200,200,0.2)" borderRadius="30px">
-              <Text padding="50px" paddingBottom="10px" fontWeight="800" fontSize="20">
-
+              <Text
+                padding="50px"
+                paddingBottom="10px"
+                fontWeight="800"
+                fontSize="20"
+              >
                 Location : {hall.hall_location}
-                <br/>
+                <br />
                 Capacity : {hall.hall_capacity}
-                <br/>
+                <br />
                 Rating : {hall.hall_rating}
-                <br/>
-                Equipments : Something ... 
-                
+                <br />
+                Equipments : {hall.hall_equipments}
               </Text>
-            </Box>}
-            {req!=0  && 
-            <Box width="400px" height="70%"  borderRadius="30px">
-              <Text fontSize="20px" padding="50px" paddingBottom="10px" fontWeight="600">
+            </Box>
+          )}
+          {req != 0 && (
+            <Box width="400px" height="70%" borderRadius="30px">
+              <Text
+                fontSize="20px"
+                padding="50px"
+                paddingBottom="10px"
+                fontWeight="600"
+              >
                 {" "}
-                Name: {hall.user}
+                id: {hall.hall}
               </Text>
               <Text paddingLeft="50px" paddingRight="20px" fontWeight="500">
                 {" "}
-                Start: {hall.slotStart.slice(0,10)}  { hall.slotStart.slice(11,16)}
+                Start: {hall.slotStart.slice(0, 10)}{" "}
+                {hall.slotStart.slice(11, 16)}
               </Text>
               <Text paddingLeft="50px" paddingRight="20px" fontWeight="500">
-                End : {hall.slotStart.slice(0,10)}  { hall.slotEnd.slice(11,16)}
+                End : {hall.slotStart.slice(0, 10)} {hall.slotEnd.slice(11, 16)}
               </Text>
-            </Box>}
+            </Box>
+          )}
 
-
-            {!hall.pending  && 
+          {!hall.pending && (
             <Button
               marginLeft="40%"
               width="150px"
@@ -116,19 +142,19 @@ const hall_card = ({ hall, req }) => {
               border=" 2px solid black"
               marginTop="20px"
               color="black"
-              onClick={() =>{
-                console.log(hall)
-                if(req==1){
+              onClick={() => {
+                console.log(hall);
+                if (req == 1) {
                   router.push(`/hall/${hall.hall}`);
-                }else{
+                } else {
                   router.push(`/hall/${hall.id}`);
                 }
-                
               }}
             >
               Book
-            </Button>}
-            {hall.pending  && 
+            </Button>
+          )}
+          {hall.pending && (
             <Button
               marginLeft="40%"
               width="150px"
@@ -138,14 +164,16 @@ const hall_card = ({ hall, req }) => {
               border=" 2px solid black"
               marginTop="20px"
               color="red"
+              onClick={() => {
+                router.push(`/hall/${hall.hall}`);
+              }}
             >
-              Pending ... 
-            </Button>}
-
-
-          </Box>
+              Pending ...
+            </Button>
+          )}
         </Box>
       </Box>
-    )
+    </Box>
+  );
 };
 export default hall_card;

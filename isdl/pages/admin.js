@@ -1,12 +1,8 @@
 import React, { useState, useContext } from "react";
 import {
   Box,
-  Input,
-  FormControl,
-  FormLabel,
   Text,
   Button,
-  Image,
 } from "@chakra-ui/react";
 import AuthContext from "../context/AuthContext";
 import Req_card from "../components/Req_card";
@@ -17,28 +13,21 @@ const admin = () => {
   const { User, Jwt } = useContext(AuthContext);
   const [pendings, setPendings] = useState(null);
   async function bookHall({pending,ac}) {
-    console.log("Where are my pendings");
-    let url;
-    if(ac){
-      url = "https://isdllab.herokuapp.com/acceptRequest?"
-    } 
-    else{
-      url = "https://isdllab.herokuapp.com/dorime"
-    }
     const response = await fetch(
-      url + new URLSearchParams({
+      "https://isdllab.herokuapp.com/acceptRequest?" + new URLSearchParams({
           jwt: Jwt,
           id: pending.id,
+          ac:ac
         }),
       {
         method: "POST",
       }
     );
-    let data = await response.json();
     if (response.status == 200) {
-      alert("Done");
+      if(ac) alert("Accepted");
+      else alert("Rejected")
     } else {
-      alert("something went wrong");
+      alert("Something went wrong !!");
     }
     console.log(response);
     setTimeout(() => {
@@ -68,7 +57,7 @@ const admin = () => {
         <Text fontSize="30px" fontWeight="1000">
           Pending Requests :)
         </Text>
-        <Button width="200px" colorScheme="red" border="2px solid black"   onClick={() => {router.push("/dashboard")}}> Back</Button>
+        <Button width="200px" colorScheme="red" border="2px solid black" onClick={() => {router.push("/dashboard")}}> Back</Button>
         </Box>
         <Box display="flex" flexWrap="wrap" flexDirection="row" width="1900px">
           {pendings.map((pending) => {
@@ -82,14 +71,14 @@ const admin = () => {
                     display={"flex"}
                     justifyContent="space-between"
                     marginTop="-170px"
-                    marginLeft="35px"
+                    marginLeft="50px"
                   >
                     
                   <Button width="100px" colorScheme={"red"} onClick={() => bookHall({pending : pending, ac: false})}>
                     Reject
                   </Button>
                   <Button width="100px" colorScheme={"green"} onClick={() => bookHall({pending : pending, ac: true})}>
-                    Accecpt
+                    Accept
                   </Button>
                   </Box>
                 </Box>

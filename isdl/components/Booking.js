@@ -16,16 +16,8 @@ let disabledIntervals = [];
 let localDate=0;
 
 async function bookHall({ id, jwt ,Date,start,end}) { 
-  let Bg = window.document.getElementsByClassName("react_time_range__track")[0].style.backgroundColor 
-  console.log(Bg);
-  
+  let Bg = window.document.getElementsByClassName("react_time_range__track")[0].style.backgroundColor   
   if(Bg=='rgba(98, 203, 102, 0.5)'){
-  console.log("Book plox !");
-  console.log(jwt);
-  console.log(Date);
-  console.log(start.toLocaleTimeString('it-IT'))
-  console.log(end.toLocaleTimeString('it-IT'))
-
   const response = await fetch(
     "https://isdllab.herokuapp.com/createBooking?" +
       new URLSearchParams({

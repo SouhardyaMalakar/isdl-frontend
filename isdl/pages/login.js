@@ -9,13 +9,9 @@ import {
   Image
 } from "@chakra-ui/react";
 import AuthContext from "../context/AuthContext";
-import bg from '../public/blue.jpg'
 
 const login = () => {
   const { loginUser } = useContext(AuthContext);
-  const [name, setName] = useState();
-  const [password, setPassword] = useState();
-  const [email, setEmail] = useState();
 
   return (
     <Box display="flex" justifyContent={"center"} >

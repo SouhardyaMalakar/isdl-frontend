@@ -30,7 +30,7 @@ function dashboard() {
               {" "}
               Welcome {User.name} :)
             </Text>
-            <Text margin="20px" color={"black"} fontWeight="500">
+            <Text fontSize={30} margin="20px" color={"black"} fontWeight="700">
               {" "}
               Your recent Bookings :{" "}
             </Text>
@@ -43,7 +43,6 @@ function dashboard() {
               justifyContent="space-evenly"
               bg="#70717220"
               borderRadius="20px"
-              // flexWrap="wrap"
               marginBottom="50px"
             >
               {halls.map((hall) => {
