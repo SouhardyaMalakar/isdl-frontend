@@ -1,9 +1,6 @@
-import React, { useState, useContext } from "react";
 import { endOfToday, set } from "date-fns";
 import TimeRange from "./slider";
-import { Box, Button, Text, Image } from "@chakra-ui/react";
-import AuthContext from "../context/AuthContext";
-import { slice } from "lodash";
+import { Box, Button, Text} from "@chakra-ui/react";
 
 const now = new Date();
 const getTodayAtSpecificHour = (hour = 12) =>
@@ -13,39 +10,39 @@ const selectedEnd = getTodayAtSpecificHour(14);
 const startTime = getTodayAtSpecificHour(7);
 const endTime = endOfToday();
 let disabledIntervals = [];
-let localDate=0;
+let localDate = 0;
 
-async function bookHall({ id, jwt ,Date,start,end}) { 
-  let Bg = window.document.getElementsByClassName("react_time_range__track")[0].style.backgroundColor   
-  if(Bg=='rgba(98, 203, 102, 0.5)'){
-  const response = await fetch(
-    "https://isdllab.herokuapp.com/createBooking?" +
-      new URLSearchParams({
-        id: id,
-        date:Date,
-        start: start.toLocaleTimeString('it-IT'),
-        end:  end.toLocaleTimeString('it-IT'),
-        jwt: jwt,
-      }),
-    {
-      method: "POST",
+async function bookHall({ id, jwt, Date, start, end }) {
+  let Bg = window.document.getElementsByClassName("react_time_range__track")[0]
+    .style.backgroundColor;
+  if (Bg == "rgba(98, 203, 102, 0.5)") {
+    const response = await fetch(
+      "https://isdllab.herokuapp.com/createBooking?" +
+        new URLSearchParams({
+          id: id,
+          date: Date,
+          start: start.toLocaleTimeString("it-IT"),
+          end: end.toLocaleTimeString("it-IT"),
+          jwt: jwt,
+        }),
+      {
+        method: "POST",
+      }
+    );
+
+    if (response.status == 200) {
+      alert("Hall Booking sent for approval !!");
+    } else {
+      alert("something went wrong");
     }
-  );
-
-  if (response.status == 200) {
-    alert("Hall Booking sent for approval !!");
+    getDisabled({ id: id, Date: Date });
   } else {
-    alert("something went wrong");
+    alert("Invalid slot selected !!");
   }
-  getDisabled({id:id,Date:Date});
-}
-else{
-  alert("Invalid slot selected !!");
-}
 }
 
-async function getDisabled({id,Date}) {
-  localDate=Date;
+async function getDisabled({ id, Date }) {
+  localDate = Date;
   const response = await fetch("https://isdllab.herokuapp.com/getAllBookings", {
     method: "GET",
   });
@@ -53,28 +50,24 @@ async function getDisabled({id,Date}) {
   let disabled = [];
   for (let i = 0; i < data.length; i++) {
     if (data[i].hall == id) {
-      // console.log(data[i].slotStart);
-      const Bd = data[i].slotStart.toLocaleString().split(",")[0].split('-');
-      let day = Bd[2].split('T')[0];
+      const Bd = data[i].slotStart.toLocaleString().split(",")[0].split("-");
+      let day = Bd[2].split("T")[0];
       let month = Bd[1];
-      if(month[0]==0){
-        month= month.substring(1);
+      if (month[0] == 0) {
+        month = month.substring(1);
       }
-      if(day[0]==0){
-        day= day.substring(1);
+      if (day[0] == 0) {
+        day = day.substring(1);
       }
-      const BookDay = day + '/' + month + '/' + Bd[0]
-      console.log(BookDay)
-      console.log(Date)
+      const BookDay = day + "/" + month + "/" + Bd[0];
       if (BookDay == Date) {
         disabled.push({
-          start: getTodayAtSpecificHour(data[i].slotStart.slice(11 ,13)),
-          end: getTodayAtSpecificHour(data[i].slotEnd.slice(11 ,13))
+          start: getTodayAtSpecificHour(data[i].slotStart.slice(11, 13)),
+          end: getTodayAtSpecificHour(data[i].slotEnd.slice(11, 13)),
         });
       }
     }
   }
-  // console.log(disabled);
   disabledIntervals = disabled;
 }
 
@@ -88,11 +81,11 @@ class App extends React.Component {
   render() {
     const { selectedInterval, error } = this.state;
     const date = this.props.date;
-    let month = date.getMonth()+1;
-    const Date =date.getDate()+'/'+month + '/' + date.getFullYear();
-    getDisabled({id:this.props.hall,Date:Date});
+    let month = date.getMonth() + 1;
+    const Date = date.getDate() + "/" + month + "/" + date.getFullYear();
+    getDisabled({ id: this.props.hall, Date: Date });
 
-    if (localDate==Date) {
+    if (localDate == Date) {
       return (
         <Box>
           <Box display="flex" flexDirection="column" height="400px">
@@ -124,7 +117,13 @@ class App extends React.Component {
             >
               <Button
                 onClick={() =>
-                  bookHall({ id: this.props.hall, jwt: this.props.jwt, Date:Date, start:selectedInterval[0], end:selectedInterval[1]})
+                  bookHall({
+                    id: this.props.hall,
+                    jwt: this.props.jwt,
+                    Date: Date,
+                    start: selectedInterval[0],
+                    end: selectedInterval[1],
+                  })
                 }
                 marginLeft={"1300px"}
                 colorScheme="red"

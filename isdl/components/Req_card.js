@@ -1,16 +1,6 @@
-import React, { useState, useContext } from "react";
-import {
-  Box,
-  Input,
-  FormControl,
-  FormLabel,
-  Text,
-  Button,
-  Image,
-} from "@chakra-ui/react";
+import { Box, Text, Image } from "@chakra-ui/react";
 
-function Req_card({pending}) {
-  console.log(pending)
+function Req_card({ pending }) {
   return (
     <Box
       bg="#fffef2"
@@ -34,7 +24,7 @@ function Req_card({pending}) {
           fontSize="22"
           paddingTop="15px"
         >
-          Hall:  {pending.hall}
+          Hall: {pending.hall}
         </Text>
       </Box>
       <Box
@@ -61,12 +51,7 @@ function Req_card({pending}) {
             borderRadius="5px"
             boxShadow={"5px 5px 10px "}
           ></Image>
-          <Box
-            width="80%"
-            margin="25px"
-            height="50px"
-          >
-          </Box>
+          <Box width="80%" margin="25px" height="50px"></Box>
         </Box>
         <Box
           display="flex"
@@ -75,16 +60,21 @@ function Req_card({pending}) {
           flexDirection="column"
           justifyContent="center"
         >
-          <Box width="100%" height="70%" >
-            <Text padding="50px" paddingTop= "20px" paddingLeft="70px" fontWeight="800">
+          <Box width="100%" height="70%">
+            <Text
+              padding="50px"
+              paddingTop="20px"
+              paddingLeft="70px"
+              fontWeight="800"
+            >
               {" "}
-              Request By: {pending.user}<br/>
-              Date: {pending.slotStart.slice(0,10)} <br/>
-              Start:  {pending.slotStart.slice(11,19)}<br/>
-              End: {pending.slotEnd.slice(11,19)}
-
+              Request By: {pending.user}
+              <br />
+              Date: {pending.slotStart.slice(0, 10)} <br />
+              Start: {pending.slotStart.slice(11, 19)}
+              <br />
+              End: {pending.slotEnd.slice(11, 19)}
             </Text>
-            
           </Box>
         </Box>
       </Box>

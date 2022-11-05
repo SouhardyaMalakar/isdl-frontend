@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import {
   Box,
   Input,
@@ -6,7 +6,7 @@ import {
   FormLabel,
   Text,
   Button,
-  Image
+  Image,
 } from "@chakra-ui/react";
 import AuthContext from "../context/AuthContext";
 
@@ -14,7 +14,7 @@ const index = () => {
   const { loginUser } = useContext(AuthContext);
 
   return (
-    <Box display="flex" justifyContent={"center"} >
+    <Box display="flex" justifyContent={"center"}>
       <Box
         width="1000px"
         height="500px"
@@ -43,18 +43,24 @@ const index = () => {
           width={"45%"}
         >
           <form onSubmit={loginUser} width={"100%"}>
-          <Text fontSize={"50px"} as="b">
-            Login
-          </Text>
+            <Text fontSize={"50px"} as="b">
+              Login
+            </Text>
             <FormControl width={"100%"}>
               <FormLabel>Email address</FormLabel>
               <Input type="email" name="email" />
               <FormLabel>Password</FormLabel>
               <Input type="password" name="password" />
             </FormControl>
-            <Button border="2px solid black"  width="100%" marginTop="70px" bg={"#ff9800"} type="submit">
-                Submit
-              </Button>
+            <Button
+              border="2px solid black"
+              width="100%"
+              marginTop="70px"
+              bg={"#ff9800"}
+              type="submit"
+            >
+              Submit
+            </Button>
           </form>
         </Box>
       </Box>

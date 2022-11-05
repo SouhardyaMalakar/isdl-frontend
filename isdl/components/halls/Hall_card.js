@@ -41,7 +41,7 @@ const hall_card = ({ hall, req }) => {
             paddingTop="15px"
           >
             {" "}
-           {hall.hall_name}
+            {hall.hall_name}
           </Text>
         )}
       </Box>
@@ -143,7 +143,6 @@ const hall_card = ({ hall, req }) => {
               marginTop="20px"
               color="black"
               onClick={() => {
-                console.log(hall);
                 if (req == 1) {
                   router.push(`/hall/${hall.hall}`);
                 } else {

@@ -12,10 +12,6 @@ import {
 function feedback() {
   async function sendFeedback(e) {
     e.preventDefault();
-    console.log(
-      "hall : " + e.target.hall.value + ",  Issue : " + e.target.issue.value
-    );
-
     const response = await fetch(
       "https://isdllab.herokuapp.com/sendFeedback?",
       {

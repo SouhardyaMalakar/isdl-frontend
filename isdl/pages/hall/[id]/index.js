@@ -5,7 +5,7 @@ import Booking from "../../../components/Booking";
 import AuthContext from "../../../context/AuthContext";
 
 const index = () => {
-  const { date , Jwt } = useContext(AuthContext);
+  const { date, Jwt } = useContext(AuthContext);
   const { asPath } = useRouter();
   const path = asPath.split("/");
   const router = useRouter();
@@ -50,23 +50,29 @@ const index = () => {
                 {" "}
                 {hall.hall_name}
               </Text>
-              <Text fontWeight="800" fontSize="26px"> 
+              <Text fontWeight="800" fontSize="26px">
                 Location : {hall.hall_location}
               </Text>
-              <Text fontWeight="800" fontSize="26px"> 
-                Equipments :  
+              <Text fontWeight="800" fontSize="26px">
+                Equipments :
               </Text>
               <Text fontSize="22px" marginLeft="100px">
-               {hall.hall_equipments}
+                {hall.hall_equipments}
               </Text>
-              <Text fontWeight="800" fontSize="26px"> Capacity : {hall.hall_capacity} </Text>
-              <Text fontWeight="800" fontSize="26px"> Rating : {hall.hall_rating} &#9733; </Text>
+              <Text fontWeight="800" fontSize="26px">
+                {" "}
+                Capacity : {hall.hall_capacity}{" "}
+              </Text>
+              <Text fontWeight="800" fontSize="26px">
+                {" "}
+                Rating : {hall.hall_rating} &#9733;{" "}
+              </Text>
             </Box>
           </Box>
-          
-          <Booking date={date} hall={hall.id} jwt= {Jwt} />
+
+          <Booking date={date} hall={hall.id} jwt={Jwt} />
           <Button
-          marginLeft="250px"
+            marginLeft="250px"
             onClick={() => {
               router.push("/halls");
             }}
