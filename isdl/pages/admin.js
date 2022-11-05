@@ -71,10 +71,10 @@ const admin = () => {
                     marginLeft="50px"
                   >
                     
-                  <Button width="100px" colorScheme={"red"} onClick={() => bookHall({pending : pending, ac: false})}>
+                  <Button width="100px" colorScheme={"red"} onClick={() => bookHall({pending : pending, ac: 0})}>
                     Reject
                   </Button>
-                  <Button width="100px" colorScheme={"green"} onClick={() => bookHall({pending : pending, ac: true})}>
+                  <Button width="100px" colorScheme={"green"} onClick={() => bookHall({pending : pending, ac: 1})}>
                     Accept
                   </Button>
                   </Box>
