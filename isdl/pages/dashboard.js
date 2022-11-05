@@ -13,7 +13,8 @@ function dashboard() {
   if (User && Jwt) {
     if (lechalls) {
       let halls;
-      halls = lechalls.slice(-4, -1);
+      console.log(lechalls);
+      halls=lechalls.slice(-4,-1);
       return (
         <Box height="100%">
           <Box
@@ -45,7 +46,7 @@ function dashboard() {
             >
               {halls.map((hall) => {
                 {
-                  return <Hall_card key={hall.id} hall={hall} req={1} />;
+                  return <Hall_card key={hall.id} hall={hall}  req={1}/>;
                 }
               })}
             </Box>
@@ -77,6 +78,7 @@ function dashboard() {
       );
     } else {
       (async () => {
+        console.log("Where are my bookings");
         const response = await fetch(
           "https://isdllab.herokuapp.com/getUserBookings?" +
             new URLSearchParams({ jwt: Jwt }),
@@ -87,10 +89,14 @@ function dashboard() {
         let data = await response.json();
         setHalls(data);
       })();
-      return <div>Here comes JSX !</div>;
+        return (
+            <div>Here comes JSX !</div>
+        );
     }
   } else {
-    return <div>who are u ???</div>;
+    return (
+      <div>who are u ???</div>
+    )
   }
 }
 

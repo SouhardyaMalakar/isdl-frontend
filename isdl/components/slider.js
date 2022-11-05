@@ -1,7 +1,7 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { scaleTime } from "d3-scale";
-import { Slider, Rail, Handles, Tracks, Ticks } from "react-compound-slider";
+import React from 'react'
+import PropTypes from 'prop-types'
+import { scaleTime } from 'd3-scale'
+import { Slider, Rail, Handles, Tracks, Ticks } from 'react-compound-slider'
 import {
   format,
   addHours,
@@ -12,116 +12,100 @@ import {
   isAfter,
   set,
   addMinutes,
-} from "date-fns";
+} from 'date-fns'
 
-import SliderRail from "./time_line/SliderRail";
-import Track from "./time_line/Track";
-import Tick from "./time_line/Tick";
-import Handle from "./time_line/Handle";
+import SliderRail from './time_line/SliderRail'
+import Track from './time_line/Track'
+import Tick from './time_line/Tick'
+import Handle from './time_line/Handle'
 
 // import '../styles/global.scss'
 
 const getTimelineConfig = (timelineStart, timelineLength) => (date) => {
-  const percent =
-    (differenceInMilliseconds(date, timelineStart) / timelineLength) * 100;
-  const value = Number(format(date, "T"));
-  return { percent, value };
-};
+  const percent = differenceInMilliseconds(date, timelineStart)/timelineLength * 100
+  const value = Number(format(date, 'T'))
+  return { percent, value }
+}
 
-const getFormattedBlockedIntervals = (
-  blockedDates = [],
-  [startTime, endTime]
-) => {
-  if (!blockedDates.length) return null;
+const getFormattedBlockedIntervals = (blockedDates = [], [startTime, endTime]) => {
+  if (!blockedDates.length) return null
 
-  const timelineLength = differenceInMilliseconds(endTime, startTime);
-  const getConfig = getTimelineConfig(startTime, timelineLength);
+  const timelineLength = differenceInMilliseconds(endTime, startTime)
+  const getConfig = getTimelineConfig(startTime, timelineLength)
 
   const formattedBlockedDates = blockedDates.map((interval, index) => {
-    let { start, end } = interval;
+    let { start, end } = interval
 
-    if (isBefore(start, startTime)) start = startTime;
-    if (isAfter(end, endTime)) end = endTime;
+    if (isBefore(start, startTime)) start = startTime
+    if (isAfter(end, endTime)) end = endTime
 
-    const source = getConfig(start);
-    const target = getConfig(end);
+    const source = getConfig(start)
+    const target = getConfig(end)
 
-    return { id: `blocked-track-${index}`, source, target };
-  });
+    return { id: `blocked-track-${index}`, source, target }
+  })
 
-  return formattedBlockedDates;
-};
+  return formattedBlockedDates
+}
 
-const getNowConfig = ([startTime, endTime]) => {
-  const timelineLength = differenceInMilliseconds(endTime, startTime);
-  const getConfig = getTimelineConfig(startTime, timelineLength);
+const getNowConfig = ([startTime, endTime])  => {
+  const timelineLength = differenceInMilliseconds(endTime, startTime)
+  const getConfig = getTimelineConfig(startTime, timelineLength)
 
-  const source = getConfig(new Date());
-  const target = getConfig(addMinutes(new Date(), 1));
+  const source = getConfig(new Date())
+  const target = getConfig(addMinutes(new Date(), 1))
 
-  return { id: "now-track", source, target };
-};
+  return { id: 'now-track', source, target }
+}
 
 class TimeRange extends React.Component {
-  get disabledIntervals() {
-    return getFormattedBlockedIntervals(
-      this.props.disabledIntervals,
-      this.props.timelineInterval
-    );
+  get disabledIntervals () {
+    return getFormattedBlockedIntervals(this.props.disabledIntervals, this.props.timelineInterval)
   }
 
-  get now() {
-    return getNowConfig(this.props.timelineInterval);
+  get now () {
+    return getNowConfig(this.props.timelineInterval)
   }
 
-  onChange = (newTime) => {
-    const formattedNewTime = newTime.map((t) => new Date(t));
-    this.props.onChangeCallback(formattedNewTime);
-  };
+  onChange = newTime => {
+    const formattedNewTime = newTime.map(t => new Date(t))
+    this.props.onChangeCallback(formattedNewTime)
+  }
 
   checkIsSelectedIntervalNotValid = ([start, end], source, target) => {
-    const { value: startInterval } = source;
-    const { value: endInterval } = target;
+    const { value: startInterval } = source
+    const { value: endInterval } = target
 
-    if (
-      (startInterval > start && endInterval <= end) ||
-      (startInterval >= start && endInterval < end)
-    )
-      return true;
-    if (start >= startInterval && end <= endInterval) return true;
+    if (startInterval > start && endInterval <= end || startInterval >= start && endInterval < end)
+      return true
+    if (start >= startInterval && end <= endInterval) return true
 
-    const isStartInBlockedInterval =
-      start > startInterval && start < endInterval && end >= endInterval;
-    const isEndInBlockedInterval =
-      end < endInterval && end > startInterval && start <= startInterval;
+    const isStartInBlockedInterval = start > startInterval && start < endInterval && end >= endInterval
+    const isEndInBlockedInterval = end < endInterval && end > startInterval && start <= startInterval
 
-    return isStartInBlockedInterval || isEndInBlockedInterval;
-  };
+    return isStartInBlockedInterval || isEndInBlockedInterval
+  }
 
-  onUpdate = (newTime) => {
-    const { onUpdateCallback } = this.props;
-    const disabledIntervals = this.disabledIntervals;
+  onUpdate = newTime => {
+    const { onUpdateCallback } = this.props
+    const disabledIntervals = this.disabledIntervals
 
     if (disabledIntervals?.length) {
       const isValuesNotValid = disabledIntervals.some(({ source, target }) =>
-        this.checkIsSelectedIntervalNotValid(newTime, source, target)
-      );
-      const formattedNewTime = newTime.map((t) => new Date(t));
-      onUpdateCallback({ error: isValuesNotValid, time: formattedNewTime });
-      return;
+        this.checkIsSelectedIntervalNotValid(newTime, source, target))
+      const formattedNewTime = newTime.map(t => new Date(t))
+      onUpdateCallback({ error: isValuesNotValid, time: formattedNewTime })
+      return
     }
 
-    const formattedNewTime = newTime.map((t) => new Date(t));
-    onUpdateCallback({ error: false, time: formattedNewTime });
-  };
+    const formattedNewTime = newTime.map(t => new Date(t))
+    onUpdateCallback({ error: false, time: formattedNewTime })
+  }
 
   getDateTicks = () => {
-    const { timelineInterval, ticksNumber } = this.props;
-    return scaleTime()
-      .domain(timelineInterval)
-      .ticks(ticksNumber)
-      .map((t) => +t);
-  };
+    const { timelineInterval, ticksNumber } = this.props
+    return scaleTime().domain(timelineInterval).ticks(ticksNumber).map(t => +t)
+  }
 
   render() {
     const {
@@ -134,40 +118,32 @@ class TimeRange extends React.Component {
       showNow,
       formatTick,
       mode,
-    } = this.props;
+    } = this.props
 
-    const domain = timelineInterval.map((t) => Number(t));
+    const domain = timelineInterval.map(t => Number(t))
 
-    const disabledIntervals = this.disabledIntervals;
+    const disabledIntervals = this.disabledIntervals
 
     return (
-      <div
-        className={
-          containerClassName || "react_time_range__time_range_container"
-        }
-      >
+      <div className={containerClassName || 'react_time_range__time_range_container' }>
         <Slider
           mode={mode}
           step={step}
           domain={domain}
           onUpdate={this.onUpdate}
           onChange={this.onChange}
-          values={selectedInterval.map((t) => +t)}
-          rootStyle={{ position: "relative", width: "100%" }}
+          values={selectedInterval.map(t => +t)}
+          rootStyle={{ position: 'relative', width: '100%' }}
         >
           <Rail>
-            {({ getRailProps }) => (
-              <SliderRail
-                className={sliderRailClassName}
-                getRailProps={getRailProps}
-              />
-            )}
+            {({ getRailProps }) =>
+              <SliderRail className={sliderRailClassName} getRailProps={getRailProps} />}
           </Rail>
 
           <Handles>
             {({ handles, getHandleProps }) => (
               <>
-                {handles.map((handle) => (
+                {handles.map(handle => (
                   <Handle
                     error={error}
                     key={handle.id}
@@ -183,7 +159,7 @@ class TimeRange extends React.Component {
           <Tracks left={false} right={false}>
             {({ tracks, getTrackProps }) => (
               <>
-                {tracks?.map(({ id, source, target }) => (
+                {tracks?.map(({ id, source, target }) =>
                   <Track
                     error={error}
                     key={id}
@@ -191,7 +167,7 @@ class TimeRange extends React.Component {
                     target={target}
                     getTrackProps={getTrackProps}
                   />
-                ))}
+                )}
               </>
             )}
           </Tracks>
@@ -230,7 +206,7 @@ class TimeRange extends React.Component {
           <Ticks values={this.getDateTicks()}>
             {({ ticks }) => (
               <>
-                {ticks.map((tick) => (
+                {ticks.map(tick => (
                   <Tick
                     key={tick.id}
                     tick={tick}
@@ -243,7 +219,7 @@ class TimeRange extends React.Component {
           </Ticks>
         </Slider>
       </div>
-    );
+    )
   }
 }
 
@@ -256,20 +232,20 @@ TimeRange.propTypes = {
   sliderRailClassName: PropTypes.string,
   step: PropTypes.number,
   formatTick: PropTypes.func,
-};
+}
 
 TimeRange.defaultProps = {
   selectedInterval: [
     set(new Date(), { minutes: 0, seconds: 0, milliseconds: 0 }),
-    set(addHours(new Date(), 1), { minutes: 0, seconds: 0, milliseconds: 0 }),
+    set(addHours(new Date(), 1), { minutes: 0, seconds: 0, milliseconds: 0 })
   ],
   timelineInterval: [startOfToday(), endOfToday()],
-  formatTick: (ms) => format(new Date(ms), "HH:mm"),
+  formatTick: ms => format(new Date(ms), 'HH:mm'),
   disabledIntervals: [],
-  step: 1000 * 60 * 30,
+  step: 1000*60*30,
   ticksNumber: 48,
   error: false,
   mode: 3,
-};
+}
 
-export default TimeRange;
+export default TimeRange
