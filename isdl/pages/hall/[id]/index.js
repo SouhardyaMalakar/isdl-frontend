@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Box, Button, Text, Image } from "@chakra-ui/react";
-import { Router, useRouter } from "next/router";
+import { useRouter } from "next/router";
 import Booking from "../../../components/Booking";
 import AuthContext from "../../../context/AuthContext";
 

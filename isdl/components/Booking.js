@@ -1,9 +1,7 @@
-import React, { useState, useContext } from "react";
+import React from "react";
 import { endOfToday, set } from "date-fns";
 import TimeRange from "./slider";
-import { Box, Button, Text, Image } from "@chakra-ui/react";
-import AuthContext from "../context/AuthContext";
-import { slice } from "lodash";
+import { Box, Button, Text } from "@chakra-ui/react";
 
 const now = new Date();
 const getTodayAtSpecificHour = (hour = 12) =>
@@ -53,7 +51,6 @@ async function getDisabled({id,Date}) {
   let disabled = [];
   for (let i = 0; i < data.length; i++) {
     if (data[i].hall == id) {
-      // console.log(data[i].slotStart);
       const Bd = data[i].slotStart.toLocaleString().split(",")[0].split('-');
       let day = Bd[2].split('T')[0];
       let month = Bd[1];
@@ -64,8 +61,6 @@ async function getDisabled({id,Date}) {
         day= day.substring(1);
       }
       const BookDay = day + '/' + month + '/' + Bd[0]
-      console.log(BookDay)
-      console.log(Date)
       if (BookDay == Date) {
         disabled.push({
           start: getTodayAtSpecificHour(data[i].slotStart.slice(11 ,13)),
@@ -74,7 +69,6 @@ async function getDisabled({id,Date}) {
       }
     }
   }
-  // console.log(disabled);
   disabledIntervals = disabled;
 }
 

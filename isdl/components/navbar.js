@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import React from "react";
 import AuthContext from "../context/AuthContext";
 import {Text,Button, Image} from "@chakra-ui/react"

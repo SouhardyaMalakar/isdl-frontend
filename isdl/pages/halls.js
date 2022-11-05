@@ -1,17 +1,15 @@
-import { Button, Text, Box } from "@chakra-ui/react";
+import { Text, Box } from "@chakra-ui/react";
 import AuthContext from "../context/AuthContext";
 import { useContext, useState } from "react";
 import Hall_card from "../components/halls/Hall_card"; 
-import { Router, useRouter } from "next/router";
 import Calendar from 'react-calendar'
 import moment from 'moment'
 
 const halls = () => {
-  const { User, Jwt , updateDate } = useContext(AuthContext);
+  const { updateDate } = useContext(AuthContext);
   const [date, setDate] = useState(new Date());
 
   const [halls, setHalls] = useState(null);
-  const router = useRouter();
   if (halls) {
     const changeDate = (e) => {
       setDate(e);

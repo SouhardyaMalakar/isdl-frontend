@@ -20,7 +20,6 @@ export const AuthProvider = ({children}) =>{
 
     let User = null;
     let loginUser = async (e) => {
-        console.log('Form Submitted')
         e.preventDefault()
         let response = await fetch("https://isdllab.herokuapp.com/login", {
             method: 'POST',
@@ -31,7 +30,6 @@ export const AuthProvider = ({children}) =>{
             body:JSON.stringify({'email':e.target.email.value, 'password':e.target.password.value})
         })
         let data = await response.json()
-        console.log(response)
         if(response.status === 200 ){
             setUser(jwt_decode(data.jwt))
             setAuthToken(data.jwt)

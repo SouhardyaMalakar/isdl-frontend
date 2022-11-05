@@ -3,7 +3,7 @@ import React from "react";
 import AuthContext from "../context/AuthContext";
 import { useContext, useState } from "react";
 import Hall_card from "../components/halls/Hall_card";
-import { Router, useRouter } from "next/router";
+import { useRouter } from "next/router";
 
 function dashboard() {
   const { User, Jwt } = useContext(AuthContext);
@@ -13,7 +13,6 @@ function dashboard() {
   if (User && Jwt) {
     if (lechalls) {
       let halls;
-      console.log(lechalls);
       halls=lechalls.slice(-4,-1);
       return (
         <Box height="100%">
@@ -78,7 +77,6 @@ function dashboard() {
       );
     } else {
       (async () => {
-        console.log("Where are my bookings");
         const response = await fetch(
           "https://isdllab.herokuapp.com/getUserBookings?" +
             new URLSearchParams({ jwt: Jwt }),

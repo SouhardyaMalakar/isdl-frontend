@@ -1,16 +1,10 @@
-import React, { useState, useContext } from "react";
 import {
   Box,
-  Input,
-  FormControl,
-  FormLabel,
   Text,
-  Button,
   Image,
 } from "@chakra-ui/react";
 
 function Req_card({pending}) {
-  console.log(pending)
   return (
     <Box
       bg="#fffef2"

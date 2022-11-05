@@ -10,7 +10,7 @@ import { useRouter } from "next/router";
 
 const admin = () => {
   const router = useRouter();
-  const { User, Jwt } = useContext(AuthContext);
+  const { Jwt } = useContext(AuthContext);
   const [pendings, setPendings] = useState(null);
   async function bookHall({pending,ac}) {
     const response = await fetch(
@@ -29,14 +29,12 @@ const admin = () => {
     } else {
       alert("Something went wrong !!");
     }
-    console.log(response);
     setTimeout(() => {
       getPendings();
     })
   }
 
   async function getPendings() {
-    console.log("Where are my pendings");
     const response = await fetch(
       "https://isdllab.herokuapp.com/getAllPending?" +
         new URLSearchParams({ jwt: Jwt }),
@@ -50,7 +48,6 @@ const admin = () => {
 
   if (pendings) {
 
-    console.log(pendings);
     return (
       <Box margin="100px">
         <Box display="flex" justifyContent="space-between">
@@ -90,7 +87,6 @@ const admin = () => {
     );
   } else if(Jwt && !pendings) {
     getPendings();
-    console.log(Jwt);
     return (
       <Box padding="200px">
         <Text fontSize="70px" fontWeight="1000">
