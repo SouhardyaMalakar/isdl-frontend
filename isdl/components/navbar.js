@@ -31,7 +31,7 @@ function navbar() {
         <Image borderRadius="50px" marginRight = "50px" width="50px" height="50px" src="https://thumbs.dreamstime.com/b/icon-online-conference-meeting-room-online-conference-161499024.jpg"></Image>
         <Text fontSize={"40"}color="white" fontWeight="1000" >Lecture Hall Booking </Text>
         </Box>
-        <Button  border="2px solid black"  marginTop="10px" paddingTop = '5px' colorScheme={"green"} onClick={() => {router.push('/login')}}  >LOGIN</Button>
+        <Button  border="2px solid black"  marginTop="10px" paddingTop = '5px' colorScheme={"green"} onClick={() => {router.push('/')}}  >LOGIN</Button>
       </Box>
     );
   }

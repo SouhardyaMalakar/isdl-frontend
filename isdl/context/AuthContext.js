@@ -45,7 +45,7 @@ export const AuthProvider = ({children}) =>{
         setAuthToken(null);
         setUser(null);
         localStorage.removeItem('authTokens')
-        router.push("/login")
+        router.push("/")
     }
     const updateDate = (e) => {
         setDate(e)
