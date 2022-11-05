@@ -11,17 +11,23 @@ import {
 
 function feedback() {
   async function sendFeedback(e) {
-    e.preventDefault() 
-    console.log("hall : " + e.target.hall.value + ",  Issue : " + e.target.issue.value)
+    e.preventDefault();
+    console.log(
+      "hall : " + e.target.hall.value + ",  Issue : " + e.target.issue.value
+    );
 
     const response = await fetch(
-      "https://isdllab.herokuapp.com/sendFeedback?" +
-        new URLSearchParams({
+      "https://isdllab.herokuapp.com/sendFeedback?",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({
           hall: e.target.hall.value,
           issue: e.target.issue.value,
         }),
-      {
-        method: "POST",
       }
     );
     if (response.status == 200) {
@@ -67,7 +73,7 @@ function feedback() {
               <FormLabel>Hall</FormLabel>
               <Input name="hall" />
               <FormLabel>Issue</FormLabel>
-              <Input name="issue"  height="100px"/>
+              <Input name="issue" height="100px" />
             </FormControl>
             <Button
               border="2px solid black"

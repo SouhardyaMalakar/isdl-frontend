@@ -46,7 +46,6 @@ else{
 
 async function getDisabled({id,Date}) {
   localDate=Date;
-
   const response = await fetch("https://isdllab.herokuapp.com/getAllBookings", {
     method: "GET",
   });
@@ -54,12 +53,19 @@ async function getDisabled({id,Date}) {
   let disabled = [];
   for (let i = 0; i < data.length; i++) {
     if (data[i].hall == id) {
+      // console.log(data[i].slotStart);
       const Bd = data[i].slotStart.toLocaleString().split(",")[0].split('-');
-      let month = Bd[2].split('T')[0];
+      let day = Bd[2].split('T')[0];
+      let month = Bd[1];
       if(month[0]==0){
         month= month.substring(1);
       }
-      const BookDay = Bd[1] + '/' + month+ '/' + Bd[0]
+      if(day[0]==0){
+        day= day.substring(1);
+      }
+      const BookDay = day + '/' + month + '/' + Bd[0]
+      console.log(BookDay)
+      console.log(Date)
       if (BookDay == Date) {
         disabled.push({
           start: getTodayAtSpecificHour(data[i].slotStart.slice(11 ,13)),
@@ -68,7 +74,7 @@ async function getDisabled({id,Date}) {
       }
     }
   }
-  console.log(disabled);
+  // console.log(disabled);
   disabledIntervals = disabled;
 }
 
@@ -82,8 +88,8 @@ class App extends React.Component {
   render() {
     const { selectedInterval, error } = this.state;
     const date = this.props.date;
-    const Date = date.toLocaleString().split(",")[0];
-    console.log(localDate)
+    let month = date.getMonth()+1;
+    const Date =date.getDate()+'/'+month + '/' + date.getFullYear();
     getDisabled({id:this.props.hall,Date:Date});
 
     if (localDate==Date) {

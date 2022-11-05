@@ -57,7 +57,7 @@ const halls = () => {
               </Box>
              <Box padding="50px" paddingTop="0px" display="flex" justifyContent="space-between"  >
               <Text color="black" padding="20px" fontSize="23" paddingTop="0px" fontWeight="800">
-                Selected date :   {moment(date).format('MMMM Do YYYY')}
+                Selected date :   {moment(date).format('Do MMMM YYYY')}
             </Text>
             </Box>
             </Box>

@@ -14,7 +14,6 @@ function dashboard() {
     if (lechalls) {
       let halls;
       console.log(lechalls);
-      const n = Math.min(lechalls.length,3);
       halls=lechalls.slice(-4,-1);
       return (
         <Box height="100%">

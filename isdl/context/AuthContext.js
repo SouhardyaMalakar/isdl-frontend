@@ -49,14 +49,13 @@ export const AuthProvider = ({children}) =>{
     }
     const updateDate = (e) => {
         setDate(e)
-        console.log(e)
     }
     let contextData ={
         loginUser:loginUser,
         User:user,
         logout:logout,
         Jwt:authToken,  
-        updateDate:updateDate,  
+        updateDate:updateDate,   
         date:date
     }
     return(
