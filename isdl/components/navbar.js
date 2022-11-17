@@ -10,7 +10,7 @@ function navbar() {
 
   if (User) {
     return (
-      <Box  bg="#003851"  height = "80px" padding={"10px"} display ="flex" flexDirection={"row"} justifyContent={"space-between"} paddingRight= "50px" paddingLeft = "50px">
+      <Box  bg="#003851"  padding={"10px"} display ="flex" flexDirection={"row"} justifyContent={"space-between"} paddingRight= "50px" paddingLeft = "50px">
         <Box display="flex">
         <Image  borderRadius="50px"  marginRight = "50px" width="50px" height="50px" src="https://thumbs.dreamstime.com/b/icon-online-conference-meeting-room-online-conference-161499024.jpg"></Image>
         <Text fontSize={"40"}color="white" fontWeight="800">Lecture Hall Booking </Text>

@@ -89,12 +89,12 @@ class App extends React.Component {
     if (localDate==Date) {
       return (
         <Box>
-          <Box display="flex" flexDirection="column" height="400px">
-            <Text fontSize="20px" fontWeight="600" marginLeft="200px">
+          <Box display="flex" flexDirection="column" height="400px" marginLeft="10%">
+            <Text fontSize="20px" fontWeight="600">
               {" "}
               Date : {Date}
             </Text>
-            <Box height="200px" paddingLeft="200px" marginBottom="50px">
+            <Box height="200px"  marginBottom="50px">
               <Text height="70px" fontSize="30px" fontWeight="1000">
                 {" "}
                 Select TimeSlot :
@@ -115,12 +115,13 @@ class App extends React.Component {
               padding="100px"
               paddingTop="100px"
               paddingBottom="0px"
+              flexDirection="row-reverse"
             >
               <Button
                 onClick={() =>
                   bookHall({ id: this.props.hall, jwt: this.props.jwt, Date:Date, start:selectedInterval[0], end:selectedInterval[1]})
                 }
-                marginLeft={"1300px"}
+                marginRight={"6%"}
                 colorScheme="red"
                 width="300px"
                 height="60px"

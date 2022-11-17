@@ -38,14 +38,19 @@ function dashboard() {
               height="55%"
               minHeight="200px"
               width="100%"
-              justifyContent="space-evenly"
+              justifyContent="center"
               bg="#70717220"
               borderRadius="20px"
               marginBottom="50px"
+              flexWrap="wrap"
             >
               {halls.map((hall) => {
                 {
-                  return <Hall_card key={hall.id} hall={hall}  req={1}/>;
+                  return (
+                    <Box width={"600px"}>
+                  <Hall_card key={hall.id} hall={hall}  req={1}/>;
+                  </Box>
+                  )
                 }
               })}
             </Box>
@@ -87,14 +92,22 @@ function dashboard() {
         let data = await response.json();
         setHalls(data);
       })();
-        return (
-            <div>Here comes JSX !</div>
-        );
+      return (
+        <Box padding="200px">
+          <Text fontSize="70px" fontWeight="1000">
+            Loading ...
+          </Text>
+        </Box>
+      );
     }
   } else {
     return (
-      <div>who are u ???</div>
-    )
+      <Box padding="200px">
+        <Text fontSize="70px" fontWeight="1000">
+          Loading ...
+        </Text>
+      </Box>
+    );
   }
 }
 
