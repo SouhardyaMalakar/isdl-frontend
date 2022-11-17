@@ -14,20 +14,19 @@ const index = () => {
     const Date = date.toLocaleString().split(",")[0];
     if (hall) {
       return (
-        <Box display="flex" flexDirection="column" width="100%" height="1100px">
-          <Box display="flex" height="600px" paddingRight="10%" paddingLeft="10%">
+        <Box display="flex" flexDirection="column" width="100%" minHeight="1100px">
+          <Box display="flex" minHeight="600px" paddingRight="10%" paddingLeft="10%"  flexWrap="wrap" marginTop="50px">
             <Box
               display="flex"
               width="50%"
+              minWidth="500px"
               justifyContent="center"
+              
             >
               <Box
-                bg="#fbeecd"
                 width="700px"
-                height="350px"
                 borderRadius="30px"
                 margin={"50px"} 
-                marginTop="100px"             
               >
                 <Image
                   src="https://cdn.pixabay.com/photo/2014/05/18/19/15/lecture-hall-347316_960_720.jpg"
@@ -43,15 +42,14 @@ const index = () => {
               display="flex"
               flexDirection="column"
               margin="50px"
-              marginTop="100px"             
-
+              width="100%"
               padding="70px"
-              paddingTop={"0px"}  
               boxShadow={"5px 5px 10px "}
               borderRadius="30px"
               bg="rgba(256,256,256,0.4)"
-              width="800px"
               justifyContent="center"
+              minWidth="500px"
+
             >
               <Text fontSize="60px" fontWeight="600">
                 {" "}
