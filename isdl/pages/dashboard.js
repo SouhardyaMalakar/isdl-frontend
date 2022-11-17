@@ -48,7 +48,7 @@ function dashboard() {
                 {
                   return (
                     <Box width={"600px"}>
-                  <Hall_card key={hall.id} hall={hall}  req={1}/>;
+                  <Hall_card key={hall.id} hall={hall}  req={1}/>
                   </Box>
                   )
                 }

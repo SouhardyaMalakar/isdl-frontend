@@ -4,6 +4,13 @@ import { useRouter } from "next/router";
 
 const hall_card = ({ hall, req }) => {
   const router = useRouter();
+  let star = [];
+
+  if (req==0) {
+    for (let i = 0; i < hall.hall_rating; i++) star.push(0);
+    console.log(hall.hall_rating)
+    console.log(star)
+  }
   return (
     <Box
       bg="#fffef2"
@@ -41,7 +48,7 @@ const hall_card = ({ hall, req }) => {
             paddingTop="15px"
           >
             {" "}
-           {hall.hall_name}
+            {hall.hall_name}
           </Text>
         )}
       </Box>
@@ -63,21 +70,28 @@ const hall_card = ({ hall, req }) => {
           <Image
             margin="30px"
             width="80%"
-            height="200px"
+            height="150px"
             src="hall.jpeg"
             borderRadius="5px"
             boxShadow={"5px 5px 10px "}
           ></Image>
           <Box
-            // border="1px solid black"
-            width="80%"
-            margin="25px"
             height="50px"
+            display="flex"
+            fontSize={"40px"}
+            width="80%"
+            paddingLeft={"50px"}
           >
-            <Text fontSize="28" align="center">
-              {" "}
-              &#9733; &#9733; &#9733; &#9733;{" "}
-            </Text>
+           {star.map((st) => {
+                {
+                  return (
+                  <div>
+                    &#9733;
+                  </div>
+                  )
+                }
+              })
+            }
           </Box>
         </Box>
         <Box
