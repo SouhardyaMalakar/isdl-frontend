@@ -28,7 +28,7 @@ function Req_card({pending}) {
           fontSize="22"
           paddingTop="15px"
         >
-          Hall:  {pending.hall}
+          User:  {pending.user}
         </Text>
       </Box>
       <Box
@@ -71,7 +71,7 @@ function Req_card({pending}) {
           <Box width="100%" height="70%" >
             <Text padding="50px" paddingTop= "20px" paddingLeft="70px" fontWeight="800">
               {" "}
-              User_id: {pending.user}<br/>
+              Hall_id: {pending.hall}<br/>
               Date: {pending.slotStart.slice(0,10)} <br/>
               Start:  {pending.slotStart.slice(11,19)}<br/>
               End: {pending.slotEnd.slice(11,19)}
