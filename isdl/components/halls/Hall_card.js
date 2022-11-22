@@ -5,7 +5,6 @@ import { useRouter } from "next/router";
 const hall_card = ({ hall, req }) => {
   const router = useRouter();
   let star = [];
-
   if (req==0) {
     for (let i = 0; i < hall.hall_rating; i++) star.push(0);
     console.log(hall.hall_rating)
@@ -67,14 +66,24 @@ const hall_card = ({ hall, req }) => {
           flexDirection="column"
           justifyContent="space-evenly"
         >
+          {req != 1 && (
           <Image
             margin="30px"
             width="80%"
             height="150px"
-            src="hall.jpeg"
+            src={hall.hall_image}
             borderRadius="5px"
             boxShadow={"5px 5px 10px "}
+          ></Image>)}
+
+          {req == 1 && (
+            <Image
+            margin="30px"
+            width="90%"
+            height="150px"
+            src="https://static.vecteezy.com/system/resources/thumbnails/005/330/011/small/teaching-class-flat-color-illustration-vector.jpg"            borderRadius="5px"
           ></Image>
+          )}
           <Box
             height="50px"
             display="flex"
@@ -119,8 +128,6 @@ const hall_card = ({ hall, req }) => {
                 Capacity : {hall.hall_capacity}
                 <br />
                 Rating : {hall.hall_rating}
-                <br />
-                Equipments : {hall.hall_equipments}
               </Text>
             </Box>
           )}
@@ -133,7 +140,7 @@ const hall_card = ({ hall, req }) => {
                 fontWeight="600"
               >
                 {" "}
-                id: {hall.hall}
+                Session : 
               </Text>
               <Text paddingLeft="50px" paddingRight="20px" fontWeight="500">
                 {" "}

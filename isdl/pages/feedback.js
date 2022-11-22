@@ -66,16 +66,19 @@ function feedback() {
             <Text fontSize={"50px"} as="b">
               Feedback
             </Text>
+            
             <FormControl width={"100%"}>
               <FormLabel>Hall</FormLabel>
               <Input name="hall" />
+              <FormLabel>Rate</FormLabel>
+              <Input name="rate" />
               <FormLabel>Issue</FormLabel>
-              <Input name="issue" height="100px" />
+              <Input name="issue"/>
             </FormControl>
             <Button
               border="2px solid black"
               width="100%"
-              marginTop="70px"
+              marginTop="30px"
               bg={"#ff9800"}
               type="submit"
             >

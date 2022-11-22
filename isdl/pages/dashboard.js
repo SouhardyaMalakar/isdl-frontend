@@ -13,7 +13,7 @@ function dashboard() {
   if (User && Jwt) {
     if (lechalls) {
       let halls;
-      halls=lechalls.slice(-4,-1);
+      halls=lechalls.reverse().slice(0,3);
       return (
         <Box height="100%">
           <Box
@@ -35,7 +35,7 @@ function dashboard() {
 
             <Box
               display="flex"
-              height="55%"
+              height="45%"
               minHeight="200px"
               width="100%"
               justifyContent="center"

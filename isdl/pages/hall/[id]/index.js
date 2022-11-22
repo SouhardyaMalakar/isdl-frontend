@@ -23,16 +23,11 @@ const index = () => {
               justifyContent="center"
               
             >
-              <Box
-                width="700px"
-                borderRadius="30px"
-                margin={"50px"} 
-              >
                 <Image
-                  src="https://cdn.pixabay.com/photo/2014/05/18/19/15/lecture-hall-347316_960_720.jpg"
+                  src={hall.hall_image}
                   borderRadius="30px"
+                  margin={"50px"}
                 ></Image>
-              </Box>
             </Box>
             <Box display="flex"
               width="50%"
@@ -59,7 +54,7 @@ const index = () => {
                 Location : {hall.hall_location}
               </Text>
               <Text fontWeight="800" fontSize="26px"> 
-                Equipments :  
+                Equipments :  Projector, white Board, Internet, Ac
               </Text>
               <Text fontSize="22px" marginLeft="100px">
                {hall.hall_equipments}

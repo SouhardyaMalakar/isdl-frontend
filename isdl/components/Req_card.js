@@ -51,9 +51,8 @@ function Req_card({pending}) {
             margin="30px"
             width="150px"
             height="180px"
-            src="hall.jpeg"
+            src="https://static.vecteezy.com/system/resources/thumbnails/005/330/011/small/teaching-class-flat-color-illustration-vector.jpg"
             borderRadius="5px"
-            boxShadow={"5px 5px 10px "}
           ></Image>
           <Box
             width="80%"
@@ -72,7 +71,7 @@ function Req_card({pending}) {
           <Box width="100%" height="70%" >
             <Text padding="50px" paddingTop= "20px" paddingLeft="70px" fontWeight="800">
               {" "}
-              Request By: {pending.user}<br/>
+              User_id: {pending.user}<br/>
               Date: {pending.slotStart.slice(0,10)} <br/>
               Start:  {pending.slotStart.slice(11,19)}<br/>
               End: {pending.slotEnd.slice(11,19)}
