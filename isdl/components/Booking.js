@@ -6,10 +6,10 @@ import { Box, Button, Text } from "@chakra-ui/react";
 const now = new Date();
 const getTodayAtSpecificHour = (hour = 12) =>
   set(now, { hours: hour, minutes: 0, seconds: 0, milliseconds: 0 });
-const selectedStart = getTodayAtSpecificHour();
-const selectedEnd = getTodayAtSpecificHour(14);
+const selectedStart = getTodayAtSpecificHour(7);
+const selectedEnd = getTodayAtSpecificHour(8);
 const startTime = getTodayAtSpecificHour(7);
-const endTime = endOfToday();
+const endTime = endOfToday(23);
 let disabledIntervals = [];
 let localDate=0;
 

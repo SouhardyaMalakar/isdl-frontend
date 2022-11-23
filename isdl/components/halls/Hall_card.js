@@ -7,8 +7,6 @@ const hall_card = ({ hall, req }) => {
   let star = [];
   if (req==0) {
     for (let i = 0; i < hall.hall_rating; i++) star.push(0);
-    console.log(hall.hall_rating)
-    console.log(star)
   }
   return (
     <Box
