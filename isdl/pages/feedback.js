@@ -69,9 +69,9 @@ function feedback() {
 
             <FormControl width={"100%"}>
               <FormLabel>Hall</FormLabel>
-              <Input name="hall" />
+              <Input name="hall"  placeholder="Hall Id" />
               <FormLabel>Rate</FormLabel>
-              <Input name="star"type="number" />
+              <Input name="star"type="number"  placeholder="(0-5)"  />
               <FormLabel>Issue</FormLabel>
               <Input name="issue" />
             </FormControl>
