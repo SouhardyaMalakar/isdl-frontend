@@ -8,12 +8,10 @@ import {
   Button,
   Image,
 } from "@chakra-ui/react";
-import { number } from "prop-types";
 
 function feedback() {
   async function sendFeedback(e) {
     e.preventDefault();
-    if (typeOf(e.target.star.value) == number && e.target.star.value <= 5 && e.target.star.value >=0) {
       const response = await fetch(
         "https://isdllab.herokuapp.com/sendFeedback?",
         {
@@ -34,11 +32,6 @@ function feedback() {
       } else {
         alert("Something went wrong !!");
       }
-    }
-    else{
-      alert("Incorrect format ");
-    }
-    
   }
   return (
     <Box display="flex" justifyContent={"center"}>
@@ -78,7 +71,7 @@ function feedback() {
               <FormLabel>Hall</FormLabel>
               <Input name="hall" />
               <FormLabel>Rate</FormLabel>
-              <Input name="rate" type="number" />
+              <Input name="star"type="number" />
               <FormLabel>Issue</FormLabel>
               <Input name="issue" />
             </FormControl>
