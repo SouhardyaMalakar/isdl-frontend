@@ -127,7 +127,7 @@ const hall_card = ({ hall, req }) => {
                 <br />
                 Capacity : {hall.hall_capacity}
                 <br />
-                Rating : {hall.hall_rating}
+                Rating : {hall.hall_rating} &#9733;
               </Text>
             </Box>
           )}
@@ -171,7 +171,9 @@ const hall_card = ({ hall, req }) => {
                 }
               }}
             >
-              Book
+              {req == 1 && "booked"}
+              {req == 0 && "book"}
+
             </Button>
           )}
           {hall.pending && (

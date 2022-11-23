@@ -8,30 +8,37 @@ import {
   Button,
   Image,
 } from "@chakra-ui/react";
+import { number } from "prop-types";
 
 function feedback() {
   async function sendFeedback(e) {
     e.preventDefault();
-
-    const response = await fetch(
-      "https://isdllab.herokuapp.com/sendFeedback?",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include",
-        body: JSON.stringify({
-          hall: e.target.hall.value,
-          issue: e.target.issue.value,
-        }),
+    if (typeOf(e.target.star.value) == number && e.target.star.value <= 5 && e.target.star.value >=0) {
+      const response = await fetch(
+        "https://isdllab.herokuapp.com/sendFeedback?",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify({
+            hall: e.target.hall.value,
+            star: e.target.star.value,
+            issue: e.target.issue.value,
+          }),
+        }
+      );
+      if (response.status == 200) {
+        alert("Feedback sent");
+      } else {
+        alert("Something went wrong !!");
       }
-    );
-    if (response.status == 200) {
-      alert("Feedback sent");
-    } else {
-      alert("Something went wrong !!");
     }
+    else{
+      alert("Incorrect format ");
+    }
+    
   }
   return (
     <Box display="flex" justifyContent={"center"}>
@@ -66,14 +73,14 @@ function feedback() {
             <Text fontSize={"50px"} as="b">
               Feedback
             </Text>
-            
+
             <FormControl width={"100%"}>
               <FormLabel>Hall</FormLabel>
               <Input name="hall" />
               <FormLabel>Rate</FormLabel>
-              <Input name="rate" />
+              <Input name="rate" type="number" />
               <FormLabel>Issue</FormLabel>
-              <Input name="issue"/>
+              <Input name="issue" />
             </FormControl>
             <Button
               border="2px solid black"

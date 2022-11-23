@@ -10,6 +10,11 @@ const halls = () => {
   const [date, setDate] = useState(new Date());
 
   const [halls, setHalls] = useState(null);
+
+  const tileDisabled = ({ activeStartDate, date, view }) => {
+    return date < new Date()
+ }
+ 
   if (halls) {
     const changeDate = (e) => {
       setDate(e);
@@ -48,7 +53,7 @@ const halls = () => {
                 </Text>
               </Box>
               <Box >
-              <Calendar height= "500px" value={date} onChange={changeDate}  />
+              <Calendar height= "500px" value={date} onChange={changeDate}  tileDisabled={tileDisabled} />
               </Box>
              <Box padding="50px" paddingTop="0px" display="flex" justifyContent="space-between"  >
               <Text color="black" padding="20px" fontSize="23" paddingTop="0px" fontWeight="800">
