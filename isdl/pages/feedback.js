@@ -13,7 +13,7 @@ function feedback() {
   async function sendFeedback(e) {
     e.preventDefault();
       const response = await fetch(
-        "https://isdllab.herokuapp.com/sendFeedback?",
+        "https://localhost:4000",
         {
           method: "POST",
           headers: {

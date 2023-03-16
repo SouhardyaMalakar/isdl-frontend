@@ -13,7 +13,7 @@ function dashboard() {
   if (User && Jwt) {
     if (lechalls) {
       let halls;
-      halls=lechalls.reverse().slice(0,3);
+      halls = lechalls.reverse().slice(0, 3);
       return (
         <Box height="100%">
           <Box
@@ -48,9 +48,9 @@ function dashboard() {
                 {
                   return (
                     <Box width={"600px"}>
-                  <Hall_card key={hall.id} hall={hall}  req={1}/>
-                  </Box>
-                  )
+                      <Hall_card key={hall.id} hall={hall} req={1} />
+                    </Box>
+                  );
                 }
               })}
             </Box>
@@ -83,10 +83,16 @@ function dashboard() {
     } else {
       (async () => {
         const response = await fetch(
-          "https://isdllab.herokuapp.com/getUserBookings?" +
-            new URLSearchParams({ jwt: Jwt }),
+          "http://localhost:4000/api/getUserBookings",
           {
-            method: "GET",
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            credentials: "include",
+            body: JSON.stringify({
+              jwt: Jwt
+            }),
           }
         );
         let data = await response.json();

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react';
 import PropTypes from 'prop-types'
 import { scaleTime } from 'd3-scale'
 import { Slider, Rail, Handles, Tracks, Ticks } from 'react-compound-slider'
@@ -248,4 +248,4 @@ TimeRange.defaultProps = {
   mode: 3,
 }
 
-export default TimeRange
+export default memo(TimeRange)

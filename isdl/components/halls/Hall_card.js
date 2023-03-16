@@ -162,9 +162,7 @@ const hall_card = ({ hall, req }) => {
               marginTop="20px"
               color="black"
               onClick={() => {
-                if (req == 1) {
-                  router.push(`/hall/${hall.hall}`);
-                } else {
+                if (req == 0) {
                   router.push(`/hall/${hall.id}`);
                 }
               }}
@@ -184,9 +182,6 @@ const hall_card = ({ hall, req }) => {
               border=" 2px solid black"
               marginTop="20px"
               color="red"
-              onClick={() => {
-                router.push(`/hall/${hall.hall}`);
-              }}
             >
               Pending ...
             </Button>

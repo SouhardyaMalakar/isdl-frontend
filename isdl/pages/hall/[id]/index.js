@@ -1,10 +1,11 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext ,useEffect } from "react";
 import { Box, Button, Text, Image } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import Booking from "../../../components/Booking";
 import AuthContext from "../../../context/AuthContext";
 
 const index = () => {
+
   const { date , Jwt } = useContext(AuthContext);
   const { asPath } = useRouter();
   const path = asPath.split("/");
@@ -86,7 +87,7 @@ const index = () => {
     } else {
       (async () => {
         const response = await fetch(
-          "https://isdllab.herokuapp.com/allHalls?",
+          "http://localhost:4000/api/getAllHalls?",
           {
             method: "GET",
           }
