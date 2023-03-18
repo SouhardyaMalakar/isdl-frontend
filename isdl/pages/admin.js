@@ -44,7 +44,6 @@ const admin = () => {
       }),
     });
     let data = await response.json();
-    // neet to fix
     setPendings(data);
   }
   if (pendings) {

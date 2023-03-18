@@ -35,7 +35,7 @@ const hall_card = ({ hall, req }) => {
             paddingTop="15px"
           >
             {" "}
-            Hall : LT {hall.hall_name}
+            Hall : {hall.name}
           </Text>
         )}
         {req != 1 && (
