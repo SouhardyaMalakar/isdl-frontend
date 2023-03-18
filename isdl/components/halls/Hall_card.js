@@ -3,6 +3,7 @@ import { Box, Button, Text, Image } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 
 const hall_card = ({ hall, req }) => {
+  console.log(hall);
   const router = useRouter();
   let star = [];
   if (req==0) {
@@ -34,7 +35,7 @@ const hall_card = ({ hall, req }) => {
             paddingTop="15px"
           >
             {" "}
-            Hall : LT {hall.id}
+            Hall : LT {hall.hall_name}
           </Text>
         )}
         {req != 1 && (
