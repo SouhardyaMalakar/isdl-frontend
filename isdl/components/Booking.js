@@ -2,6 +2,9 @@ import React, { useEffect } from "react";
 import { endOfToday, set } from "date-fns";
 import TimeRange from "./slider";
 import { Box, Button, Text } from "@chakra-ui/react";
+import io from "socket.io-client"
+
+
 const now = new Date();
 const getTodayAtSpecificHour = (hour = 24) =>
   set(now, { hours: hour, minutes: 0, seconds: 0, milliseconds: 0 });
@@ -19,23 +22,33 @@ class App extends React.Component {
       selectedInterval: [selectedStart, selectedEnd],
     };
   }
+  
   errorHandler = ({ error }) => this.setState({ error });
-  onChangeCallback = (selectedInterval) =>
-    this.setState({ selectedInterval});
+  onChangeCallback = (selectedInterval) => this.setState({ selectedInterval });
 
   componentDidMount() {
     this.getDisabled();
+
+    this.socket = io('https://isdl-backendts.onrender.com');
+     
+    this.socket.emit("join", this.props.hall)
+    this.socket.on('update', (data) => {
+      this.getDisabled();
+    });
+  }
+  componentWillUnmount() {
+    this.socket.disconnect(); 
   }
 
   async getDisabled() {
-    const response = await fetch("http://localhost:4000/api/getHallBookings", {
+    const response = await fetch("https://isdl-backendts.onrender.com/api/getHallBookings", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       credentials: "include",
       body: JSON.stringify({
-        id: this.id,
+        id: this.props.hall,
       }),
     });
     let data = await response.json();
@@ -54,7 +67,6 @@ class App extends React.Component {
       if (day[0] == 0) {
         day = day.substring(1);
       }
-      console.log()
       const BookDay = day + "/" + month + "/" + Bd[0];
       if (BookDay == Date) {
         disabled.push({
@@ -63,16 +75,15 @@ class App extends React.Component {
         });
       }
     }
-    console.log(data);
-    console.log(disabled);
     this.setState({ disabledIntervals: disabled });
   }
 
   async bookHall({ id, jwt, Date, start, end }) {
-    let Bg = window.document.getElementsByClassName("react_time_range__track")[0]
-      .style.backgroundColor;
+    let Bg = window.document.getElementsByClassName(
+      "react_time_range__track"
+    )[0].style.backgroundColor;
     if (Bg == "rgba(98, 203, 102, 0.5)") {
-      const response = await fetch("http://localhost:4000/api/createBooking?", {
+      const response = await fetch("https://isdl-backendts.onrender.com/api/createBooking?", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -85,13 +96,14 @@ class App extends React.Component {
           start: start.toLocaleTimeString("it-IT"),
           end: end.toLocaleTimeString("it-IT"),
         }),
-        
       });
-      window.document.getElementsByClassName("react_time_range__track")[0]
-      .style.backgroundColor="rgba(214, 0, 11, 0.5)"
-  
+      window.document.getElementsByClassName(
+        "react_time_range__track"
+      )[0].style.backgroundColor = "rgba(214, 0, 11, 0.5)";
+
       if (response.status == 200) {
         alert("Hall Booking sent for approval !!");
+        this.socket.emit("change", this.props.hall);
       } else {
         alert("something went wrong");
       }
@@ -102,11 +114,10 @@ class App extends React.Component {
   }
 
   render() {
-    const { selectedInterval, error , disabledIntervals} = this.state;
+    const { selectedInterval, error, disabledIntervals } = this.state;
     const date = this.props.date;
     let month = date.getMonth() + 1;
     const Date = date.getDate() + "/" + month + "/" + date.getFullYear();
-
     if (disabledIntervals) {
       return (
         <Box>

@@ -9,7 +9,7 @@ const admin = () => {
   const { Jwt } = useContext(AuthContext);
   const [pendings, setPendings] = useState(null);
   async function bookHall({ pending, ac }) {
-    const response = await fetch("http://localhost:4000/api/acceptRequest?", {
+    const response = await fetch("https://isdl-backendts.onrender.com/api/acceptRequest?", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -33,7 +33,7 @@ const admin = () => {
   }
 
   async function getPendings() {
-    const response = await fetch("http://localhost:4000/api/getAllPending", {
+    const response = await fetch("https://isdl-backendts.onrender.com/api/getAllPending", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

@@ -34,7 +34,7 @@ const hall_card = ({ hall, req }) => {
             paddingTop="15px"
           >
             {" "}
-            Hall : LT {hall.hall}
+            Hall : LT {hall.id}
           </Text>
         )}
         {req != 1 && (
@@ -121,6 +121,8 @@ const hall_card = ({ hall, req }) => {
                 fontWeight="800"
                 fontSize="20"
               >
+                Name: {hall.name} 
+                <br/>
                 Location : {hall.hall_location}
                 <br />
                 Capacity : {hall.hall_capacity}
@@ -163,7 +165,10 @@ const hall_card = ({ hall, req }) => {
               color="black"
               onClick={() => {
                 if (req == 0) {
-                  router.push(`/hall/${hall.id}`);
+                  router.push({
+                    pathname: `/hall/${hall.id}`,
+                    query: {id:hall.id},
+                  })
                 }
               }}
             >

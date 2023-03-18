@@ -83,7 +83,7 @@ function dashboard() {
     } else {
       (async () => {
         const response = await fetch(
-          "http://localhost:4000/api/getUserBookings",
+          "https://isdl-backendts.onrender.com/api/getUserBookings",
           {
             method: "POST",
             headers: {

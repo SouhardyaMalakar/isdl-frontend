@@ -5,7 +5,6 @@ import {
 } from "@chakra-ui/react";
 
 function Req_card({pending}) {
-   console.log(pending.id);
   return (
     <Box
       bg="#fffef2"
@@ -29,7 +28,7 @@ function Req_card({pending}) {
           fontSize="22"
           paddingTop="15px"
         >
-          User:  {pending.actor.id}
+          User:  {pending.actor.username}
         </Text>
       </Box>
       <Box
@@ -72,7 +71,7 @@ function Req_card({pending}) {
           <Box width="100%" height="70%" >
             <Text padding="50px" paddingTop= "20px" paddingLeft="70px" fontWeight="800">
               {" "}
-              Hall_id: {pending.hall.id}<br/>
+              HallName: {pending.hall.name}<br/>
               Date: {pending.slotStart.slice(0,10)} <br/>
               Start:  {pending.slotStart.slice(11,19)}<br/>
               End: {pending.slotEnd.slice(11,19)}

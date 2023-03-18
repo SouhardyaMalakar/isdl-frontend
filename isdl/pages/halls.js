@@ -6,6 +6,7 @@ import Calendar from "react-calendar";
 import moment from "moment";
 
 
+
 const halls = () => {
   const { updateDate } = useContext(AuthContext);
   const [date, setDate] = useState(new Date());
@@ -109,7 +110,7 @@ const halls = () => {
     );
   } else {
     (async () => {
-      const response = await fetch("http://localhost:4000/api/getAllHalls?", {
+      const response = await fetch("https://isdl-backendts.onrender.com/api/getAllHalls?", {
         method: "GET",
       });
       let data = await response.json();
