@@ -2,6 +2,7 @@ import { createContext, useState, useEffect } from "react";
 import jwt_decode from "jwt-decode";
 import { useRouter } from "next/router";
 
+
 const AuthContext = createContext();
 export default AuthContext;
 export const AuthProvider = ({ children }) => {
@@ -9,6 +10,7 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [date, setDate] = useState(new Date());
   const router = useRouter();
+
   useEffect(() => {
     if (localStorage && localStorage.getItem("authTokens")) {
       setAuthToken(JSON.parse(localStorage.getItem("authTokens")));
@@ -18,7 +20,7 @@ export const AuthProvider = ({ children }) => {
 
    let loginUser = async (e) => {
     e.preventDefault();
-    let response = await fetch("https://isdllab.herokuapp.com/login", {
+    let response = await fetch("https://isdl-backendts.onrender.com/api/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -41,7 +43,6 @@ export const AuthProvider = ({ children }) => {
   };
   const logout = () => {
     setAuthToken(null);
-    setUser(null);
     localStorage.removeItem("authTokens");
     router.push("/");
   };

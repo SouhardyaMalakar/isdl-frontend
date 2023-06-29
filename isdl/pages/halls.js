@@ -5,6 +5,8 @@ import Hall_card from "../components/halls/Hall_card";
 import Calendar from "react-calendar";
 import moment from "moment";
 
+
+
 const halls = () => {
   const { updateDate } = useContext(AuthContext);
   const [date, setDate] = useState(new Date());
@@ -108,7 +110,7 @@ const halls = () => {
     );
   } else {
     (async () => {
-      const response = await fetch("https://isdllab.herokuapp.com/allHalls?", {
+      const response = await fetch("https://isdl-backendts.onrender.com/api/getAllHalls?", {
         method: "GET",
       });
       let data = await response.json();
