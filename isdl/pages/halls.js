@@ -110,7 +110,7 @@ const halls = () => {
     );
   } else {
     (async () => {
-      const response = await fetch("https://isdl-backendts.onrender.com/api/getAllHalls?", {
+      const response = await fetch("https://isdl-backend2.onrender.com/api/getAllHalls?", {
         method: "GET",
       });
       let data = await response.json();

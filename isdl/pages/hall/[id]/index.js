@@ -10,7 +10,8 @@ const index = () => {
   const [hall, setHall] = useState(null);
   const id = router.query.id;
   const call = async (id) => {
-    const response = await fetch("https://isdl-backendts.onrender.com/api/getAllHalls?", {
+    // make it get hall by id;
+    const response = await fetch("https://isdl-backend2.onrender.com/api/getAllHalls?", {
       method: "GET",
     });
     let data = await response.json();

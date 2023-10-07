@@ -28,20 +28,19 @@ class App extends React.Component {
 
   componentDidMount() {
     this.getDisabled();
-
-    this.socket = io('https://isdl-backendts.onrender.com');
-     
-    this.socket.emit("join", this.props.hall)
-    this.socket.on('update', (data) => {
+    const wslIpAddress = '172.22.143.162';
+    this.socket = io(`http://${wslIpAddress}:3000`); 
+    this.socket.emit('join', this.props.hall);
+    this.socket.on('update', () => {
       this.getDisabled();
     });
   }
   componentWillUnmount() {
-    this.socket.disconnect(); 
+    this.socket.disconnect();
   }
 
   async getDisabled() {
-    const response = await fetch("https://isdl-backendts.onrender.com/api/getHallBookings", {
+    const response = await fetch("https://isdl-backend2.onrender.com/api/getHallBookings", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -83,7 +82,7 @@ class App extends React.Component {
       "react_time_range__track"
     )[0].style.backgroundColor;
     if (Bg == "rgba(98, 203, 102, 0.5)") {
-      const response = await fetch("https://isdl-backendts.onrender.com/api/createBooking?", {
+      const response = await fetch("https://isdl-backend2.onrender.com/api/createBooking?", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

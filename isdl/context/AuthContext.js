@@ -20,7 +20,7 @@ export const AuthProvider = ({ children }) => {
 
    let loginUser = async (e) => {
     e.preventDefault();
-    let response = await fetch("https://isdl-backendts.onrender.com/api/login", {
+    let response = await fetch("https://isdl-backend2.onrender.com/api/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
