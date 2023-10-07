@@ -28,8 +28,7 @@ class App extends React.Component {
 
   componentDidMount() {
     this.getDisabled();
-    const wslIpAddress = '172.22.143.162';
-    this.socket = io(`http://${wslIpAddress}:3000`); 
+    this.socket = io(`https://isdl-backend2.onrender.com`); 
     this.socket.emit('join', this.props.hall);
     this.socket.on('update', () => {
       this.getDisabled();
